@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Still Water" />
+<meta name="theme-color" content="#EDEFE8" />
+<title>Still Water</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23A63B2A'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23EDEFE8' font-family='serif'%3E水%3C/text%3E%3C/svg%3E" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+:root{
+  --paper:#EDEFE8; --card:#F4F5F0; --ink:#232F2A; --faint:#5C6A62;
+  --line:#C9CFC2; --seal:#A63B2A; --celadon:#8CA18C; --gold:#A9884F;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Spectral', Georgia, serif; font-size:15px; line-height:1.5;
+  min-height:100vh;}
+header{max-width:640px; margin:0 auto; padding:22px 18px 6px;
+  display:flex; align-items:center; gap:10px;}
+h1{font-family:'Marcellus', Georgia, serif; font-size:22px; font-weight:400;
+  letter-spacing:.02em; margin:0; flex:1;}
+#saveState{font-family:'Marcellus', serif; font-size:11px; letter-spacing:.08em;
+  color:var(--faint);}
+#saveState.err{color:var(--seal); font-weight:bold;}
+#syncBtn{display:flex; align-items:center; gap:7px; background:transparent;
+  border:1px solid var(--line); border-radius:16px; padding:6px 12px;
+  cursor:pointer; color:var(--faint); font-family:'Marcellus', serif;
+  font-size:11px; letter-spacing:.1em;}
+main{max-width:640px; margin:0 auto; padding:12px 16px 100px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:6px;
+  padding:16px; margin-bottom:14px;}
+.card.accent{border-left:3px solid var(--seal);}
+.label{font-family:'Marcellus', serif; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
+.banner{background:#F6E8E4; border:1px solid var(--seal); border-radius:6px;
+  padding:10px 14px; margin-bottom:14px; font-size:13px; display:none;}
+.banner.show{display:block;}
+input[type=text], textarea{width:100%; border:1px solid var(--line);
+  border-radius:5px; background:var(--paper); padding:10px 12px;
+  font-family:'Spectral', Georgia, serif; font-size:16px; color:var(--ink);
+  outline:none;}
+input:focus, textarea:focus{border-color:var(--celadon);}
+textarea{resize:vertical;}
+button{font-family:'Marcellus', serif; cursor:pointer;}
+.btn{background:var(--ink); color:var(--paper); border:none; border-radius:5px;
+  padding:10px 16px; font-size:13px;}
+.btn.seal{background:var(--seal);}
+.btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+.btn.danger{background:transparent; color:var(--seal); border:1px solid var(--seal);}
+.chip{padding:5px 12px; border-radius:14px; border:1px solid var(--line);
+  background:transparent; color:var(--faint); font-size:12px;}
+.chip.on{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+.chip.on.cel{background:var(--celadon); border-color:var(--celadon);}
+.row{display:flex; gap:8px; align-items:center;}
+.wrap{flex-wrap:wrap;}
+.mt8{margin-top:8px;} .mt10{margin-top:10px;} .mb12{margin-bottom:12px;}
+.faint{color:var(--faint);} .small{font-size:12px;} .tiny{font-size:11px;}
+.italic{font-style:italic;}
+.intention{display:flex; gap:10px; align-items:center; margin-bottom:8px;}
+.intention input{border:none; border-bottom:1px solid var(--line);
+  border-radius:0; background:transparent; padding:4px 0;}
+.tick{width:22px; height:22px; border-radius:4px; border:1.5px solid var(--line);
+  background:transparent; color:var(--paper); font-size:13px; flex-shrink:0;}
+.tick.done{background:var(--seal); border-color:var(--seal);}
+.done-text{color:var(--faint); text-decoration:line-through;}
+.term{display:flex; gap:16px;}
+.term .hz{writing-mode:vertical-rl; font-size:26px; letter-spacing:.2em;
+  color:var(--seal); font-weight:500; border-right:1px solid var(--line);
+  padding-right:12px;}
+.term .name{font-family:'Marcellus', serif; font-size:20px;}
+.status{font-size:11px; font-family:'Marcellus', serif; color:var(--paper);
+  border:none; border-radius:12px; padding:4px 10px; flex-shrink:0;}
+.streakNum{font-family:'Marcellus', serif; font-size:34px; line-height:1;}
+.empty{text-align:center; color:var(--faint); font-style:italic; padding:32px 0;
+  font-size:14px;}
+.detail{margin-top:10px; border-top:1px solid var(--line); padding-top:10px;}
+nav{position:fixed; bottom:0; left:0; right:0; background:var(--card);
+  border-top:1px solid var(--line);
+  padding:10px 0 max(10px, env(safe-area-inset-bottom));}
+.navrow{display:flex; justify-content:space-around; max-width:640px; margin:0 auto;}
+.navbtn{background:none; border:none; display:flex; flex-direction:column;
+  align-items:center; gap:4px;}
+.sealch{display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:5px; border:1.5px solid var(--line);
+  color:var(--faint); font-size:17px; transition:all .18s ease;}
+.navbtn.on .sealch{background:var(--seal); border-color:var(--seal); color:var(--paper);}
+.navlbl{font-family:'Marcellus', serif; font-size:10px; letter-spacing:.1em;
+  color:var(--faint);}
+.navbtn.on .navlbl{color:var(--ink);}
+#modal{position:fixed; inset:0; background:rgba(35,47,42,.45); z-index:50;
+  display:none; align-items:flex-end; justify-content:center;}
+#modal.show{display:flex;}
+.sheet{background:var(--paper); border-radius:16px 16px 0 0; width:100%;
+  max-width:640px; max-height:88vh; overflow-y:auto; padding:20px;}
+.mono{font-family:monospace; font-size:11px;}
+.msg{background:var(--card); border:1px solid var(--celadon); border-radius:6px;
+  padding:8px 12px; font-size:13px; margin-bottom:16px; display:none;}
+.msg.show{display:block;}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Still Water</h1>
+  <span id="saveState"></span>
+  <button id="syncBtn">⇄ SYNC</button>
+</header>
+
+<main>
+  <div class="banner" id="banner">
+    <strong style="font-family:'Marcellus',serif">Storage is not working on this device.</strong>
+    Entries will show on screen but will not survive closing the app.
+    Use ⇄ Sync to copy your data out before leaving.
+  </div>
+  <div id="view"></div>
+</main>
+
+<nav><div class="navrow" id="navrow"></div></nav>
+
+<div id="modal">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+"use strict";
+/* ============ constants ============ */
+const KEY = "still-water-v1";
+const TAGS = ["law","business","writing","life"];
+const STATUSES = ["seed","drafting","editing","published"];
+const STATUS_COLOR = {seed:"var(--celadon)", drafting:"var(--gold)", editing:"var(--seal)", published:"var(--ink)"};
+
+const TERMS = [
+ [1,5,"小寒","Minor Cold","The year's quietest stretch. Conserve, do not push."],
+ [1,20,"大寒","Major Cold","Deep cold before turning. Endings are almost beginnings."],
+ [2,4,"立春","Start of Spring","First stirring under the surface. Plant intentions, not deadlines."],
+ [2,19,"雨水","Rain Water","Softening. Let plans absorb slowly, like rain into soil."],
+ [3,5,"驚蟄","Awakening of Insects","Dormant things wake. Revisit shelved ideas."],
+ [3,20,"春分","Spring Equinox","Light and dark in balance. Check what is overweighted."],
+ [4,5,"清明","Clear and Bright","Clarity season. Clean the desk, the docket, the mind."],
+ [4,20,"穀雨","Grain Rain","Steady nourishment. Feed the projects already planted."],
+ [5,5,"立夏","Start of Summer","Growth becomes visible. Show work in progress."],
+ [5,21,"小滿","Grain Buds","Full but not yet ripe. Resist harvesting early."],
+ [6,5,"芒種","Grain in Ear","The busy season. Work with rhythm, not urgency."],
+ [6,21,"夏至","Summer Solstice","Peak light. Yin quietly begins its return."],
+ [7,7,"小暑","Minor Heat","Heat rises. Move slower on purpose; mornings are yours."],
+ [7,22,"大暑","Major Heat","Fullest heat. Do less, but do it completely."],
+ [8,7,"立秋","Start of Autumn","A turn you can feel before you can see. Begin refining."],
+ [8,23,"處暑","End of Heat","Heat withdraws. Release what the summer accumulated."],
+ [9,7,"白露","White Dew","First coolness. Precision returns; edit, condense."],
+ [9,23,"秋分","Autumn Equinox","Balance again. Gather what is finished."],
+ [10,8,"寒露","Cold Dew","Crisp air, clear thought. Good season for hard problems."],
+ [10,23,"霜降","Frost's Descent","First frost. Decide what will not survive the year."],
+ [11,7,"立冬","Start of Winter","Storing season. Consolidate, document, archive."],
+ [11,22,"小雪","Minor Snow","Quiet accumulation. Small daily deposits compound."],
+ [12,7,"大雪","Major Snow","Cover and protect. Guard your energy and your evenings."],
+ [12,21,"冬至","Winter Solstice","Deepest dark; light returns. Rest is generative."]
+];
+
+const READINGS = [
+ {src:"Dao De Jing, chapter 8", t:"Water and the low places",
+  hz:"上善若水。水善利萬物而不爭，處衆人之所惡，故幾於道。",
+  tr:"The highest good is like water. Water benefits the ten thousand things without contending, and settles in the low places people disdain. So it comes near to the Way.",
+  c:["Laozi keeps returning to water because it wins by a method no one recognizes as winning. It never argues with the rock; it goes around, and in a hundred years the rock is sand. The low place, the position everyone else avoids, turns out to be where everything gathers."],
+  pr:"Pick one conversation today where you would normally press your point, and deliberately yield the small ground. Watch what it does to the room."},
+
+ {src:"Therīgāthā · Muttā's verse", t:"So freed",
+  tr:"A rendering of the nun Muttā, from the oldest collection of women's writing in the world: So freed, so thoroughly freed am I. Freed from three crooked things: the mortar, the pestle, and my crooked husband. Freed from birth and dying, everything that dragged me back is thrown away.",
+  c:["Muttā's verse is over two thousand years old and it is not subtle. She names the grinding domestic apparatus of her life, item by item, and announces that she has put it down. The first Buddhist nuns kept these poems as proof that a woman's awakening was her own act, witnessed by her own voice.",
+     "The question her verse asks across the centuries is plain: what are your mortar and pestle, the daily grinds accepted so long they feel like nature? Naming them is the first freedom."],
+  pr:"Write down one obligation you carry only because it was handed to you. Decide tonight whether to keep it on purpose or set it down."},
+
+ {src:"I Ching, hexagram 2 · 坤", t:"The earth carries all things",
+  hz:"地勢坤，君子以厚德載物。",
+  tr:"The condition of the earth is receptive devotion. The wise deepen their character to carry all things.",
+  c:["Kun is the pure yin hexagram, six broken lines, and the image is the earth itself: it holds mountains, rivers, cities, and graves without complaint and without collapsing. Its power is capacity rather than force.",
+     "Carrying is a skill. It means receiving what the day brings without instantly reacting, and staying broad enough that one heavy thing does not tip the whole ground."],
+  pr:"Practice capacity today: when something lands on you, receive it fully for one breath before you respond at all."},
+
+ {src:"Dao De Jing, chapter 6", t:"The valley spirit, the mysterious female",
+  hz:"谷神不死，是謂玄牝。玄牝之門，是謂天地根。綿綿若存，用之不勤。",
+  tr:"The valley spirit never dies; it is called the mysterious female. The gate of the mysterious female is the root of heaven and earth. Soft and unbroken, it barely seems to be there, yet use it and it never runs dry.",
+  c:["This is the boldest verse in the classic: the source of everything is named female, and its emblem is a valley, the empty, low, receiving shape that all water runs toward. Not a throne, not a summit. A hollow.",
+     "The valley does nothing you can point to, and everything drains into it. There is a working method hidden here: be the still, open place where things naturally arrive, and you will never need to chase them."],
+  pr:"For one meeting or one conversation today, be the valley: ask, receive, and let everything come to you before you shape it."},
+
+ {src:"Zhuangzi, chapter 3 (養生主)", t:"Cook Ding's blade",
+  hz:"彼節者有間，而刀刃者無厚；以無厚入有間，恢恢乎其於遊刃必有餘地矣。",
+  tr:"The joints have openings, and the blade has no thickness. What has no thickness enters where there is space, and the blade moves with room to spare.",
+  c:["Cook Ding's knife stayed sharp for nineteen years because he never hacked at bone. He learned where the ox naturally comes apart, and cut there. Every stubborn problem has joints: the moment the other side is ready to hear it, the clause the whole contract turns on, the paragraph the essay wants to open with."],
+  pr:"Take the problem you have been forcing, stop, and spend ten minutes only looking for where it naturally comes apart."},
+
+ {src:"Sun Bu'er (孫不二), female Daoist master", t:"Gathering the mind",
+  tr:"A rendering from the twelfth-century master Sun Bu'er, who wrote the classic manuals of women's inner cultivation: Before anything else, gather the scattered mind. A mind that runs after every sound and errand spends the day's whole treasury by noon. Draw it home the way you would draw a child in from the road, gently, and again, and again.",
+  c:["Sun Bu'er raised three children, then in midlife became one of the seven founding masters of the Quanzhen school, the only woman among them, and wrote instruction specifically for women's practice. Her starting point was never austerity. It was attention: the mind, gathered, is the whole foundation.",
+     "Notice her method is maternal, not military. You do not seize the wandering mind by the collar. You call it back kindly, a thousand times if needed, and the calling back is the practice."],
+  pr:"Each time you notice your attention has scattered today, bring it back without a single word of self-scolding. The gentleness is the training."},
+
+ {src:"Dao De Jing, chapter 22", t:"Bent, and therefore whole",
+  hz:"曲則全，枉則直，窪則盈，敝則新。",
+  tr:"Bent, and therefore whole. Crooked, and therefore straightened. Hollow, and therefore filled. Worn, and therefore renewed.",
+  c:["The tree that bends in the storm keeps its roots. The one that stands perfectly rigid is the one that snaps. Somewhere today there is a hill genuinely not worth dying on, and yielding it is knowing which shape survives the wind."],
+  pr:"Name one thing you are holding perfectly rigid, and let it bend by ten percent."},
+
+ {src:"I Ching, hexagram 11 · 泰", t:"Heaven and earth in communion",
+  hz:"天地交，泰。",
+  tr:"Heaven and earth join and communicate: peace.",
+  c:["Tai puts earth on top and heaven below, which looks upside down until you see the point: heaven's energy rises and earth's settles, so arranged this way they move toward each other. Flourishing is two forces exchanging, not one force commanding.",
+     "The hexagram of peace is a diagram of every good partnership, household, and working relationship: whatever is above bends down to listen, whatever is below rises to speak, and the crossing itself is the prosperity."],
+  pr:"Find one exchange today where you hold the higher position, and deliberately move first toward the other side."},
+
+ {src:"Zhuangzi, chapter 2 (齊物論)", t:"The butterfly dream",
+  hz:"不知周之夢為蝴蝶與？蝴蝶之夢為周與？",
+  tr:"Once Zhuang Zhou dreamed he was a butterfly, fluttering wherever it pleased. Waking, he did not know: had Zhou dreamed the butterfly, or was the butterfly now dreaming Zhou?",
+  c:["The most famous passage in Daoism is a joke with a soft center: the border between you and the world is thinner than the day's seriousness admits. Zhuangzi does not resolve the question. He lets it hover, because the hovering is the medicine.",
+     "Held lightly, today's identities, the lawyer, the owner, the writer, are costumes the one life is trying on. That looseness is where play and fresh ideas come from."],
+  pr:"Hold one of your roles lightly today. Do the work fully, and remember you are the dreamer, not only the dream."},
+
+ {src:"Dao De Jing, chapter 28", t:"Know the male, keep to the female",
+  hz:"知其雄，守其雌，為天下谿。為天下谿，常德不離。",
+  tr:"Know the male, yet keep to the female, and become the stream-valley of the world. Be the stream-valley of the world, and constant power never leaves you.",
+  c:["Laozi assumes you already know the male mode: assert, climb, display. He does not tell you to unlearn it. He says keep to the female while knowing it, hold the receptive, low, gathering position with full knowledge of the other game.",
+     "This is strategy, not softness for its own sake. The stream-valley outlasts every peak because everything flows to it. Strength that knows how to stay low never has to defend a summit."],
+  pr:"In one situation today where you could assert, deliberately gather instead: listen, receive, let the current come to you."},
+
+ {src:"Li Qingzhao (李清照), Song dynasty poet", t:"Green thickening, red thinning",
+  hz:"知否？知否？應是綠肥紅瘦。",
+  tr:"From her lyric after a night of storm: I ask the maid rolling up the blinds, and she says the crab-apple looks the same as ever. Doesn't she know? Doesn't she know? By now the green must be growing fat, and the red growing thin.",
+  c:["Li Qingzhao is the finest female poet in the Chinese language, and this small lyric is really about attention. Two women look at the same tree. One sees no change. The poet, who has been paying attention, knows the storm has turned the season: leaves thickening, blossoms going.",
+     "Most of life's turnings are this quiet. The practice she models is noticing the green and the red of your own days before someone tells you everything looks the same as ever."],
+  pr:"Look closely at one ordinary thing today, your street, your desk, your own face, and name one thing that has actually changed."},
+
+ {src:"I Ching, hexagram 15 · 謙", t:"The mountain beneath the earth",
+  hz:"地中有山，謙。",
+  tr:"Within the earth, a mountain: modesty. The wise take from where there is too much and add to where there is too little.",
+  c:["The image is startling if you sit with it: a whole mountain, content to stand underground. All that mass and height, unadvertised. Qian is the only hexagram in which every single line is favorable, because substance that does not need witnesses compounds undisturbed."],
+  pr:"Let one piece of good work go completely unannounced today, and notice what wanting to announce it feels like."},
+
+ {src:"Dao De Jing, chapter 48", t:"Subtract daily",
+  hz:"為學日益，為道日損。損之又損，以至於無為。",
+  tr:"In pursuit of learning, something is added every day. In pursuit of the Way, something is dropped every day. Drop and drop again, until you arrive at effortless action.",
+  c:["Study accumulates; the Way subtracts. Both are real work, but they move in opposite directions, and most of us only ever practice the first. Subtraction has its own daily quota: one commitment declined, one project ended honestly, one belief about how you must appear, released. What remains gets all the strength."],
+  pr:"Remove one thing today instead of adding one. A task, a subscription, an obligation kept out of guilt."},
+
+ {src:"Heart Sutra · the insight of Guanyin", t:"Form and emptiness",
+  hz:"色不異空，空不異色；色即是空，空即是色。",
+  tr:"Form is not different from emptiness; emptiness is not different from form. Form is exactly emptiness; emptiness is exactly form.",
+  c:["The Heart Sutra is spoken from the meditation of Guanyin, the bodhisattva of compassion whom the Chinese tradition came to picture as female. Her insight: everything solid-seeming, the case, the deadline, the reputation, is a temporary weather pattern of causes, and the openness inside things is what lets them move and change at all.",
+     "This is meant as relief. Because nothing is fixed, nothing is stuck, including whatever feels most stuck this week."],
+  pr:"Take the situation that feels most solid and immovable right now, and list three conditions holding it up. Notice each one can shift."},
+
+ {src:"Zhuangzi, chapter 6 · the woman Nü Yu (女偊)", t:"Tranquility in the turmoil",
+  hz:"攖寧也者，攖而後成者也。",
+  tr:"In Zhuangzi's telling, the sage who has kept the Way longest is a woman, Nü Yu. Asked how she teaches, she describes a peace called ying-ning: tranquility in the very midst of disturbance. It is completed only through the disturbance itself.",
+  c:["Notice who holds the deepest teaching in this classic: a woman, unbothered by the years, instructing a man who wants what she has. Her secret is not withdrawal from the noise. Ying-ning is stillness forged inside contact, calm with the phone ringing.",
+     "This matters for anyone whose life cannot go to the mountains. The docket, the shop, the family are not obstacles to the practice. In Nü Yu's teaching, they are the forge."],
+  pr:"Today, do not wait for quiet to feel calm. In the loudest hour, find the still point once, even for three breaths."},
+
+ {src:"Dao De Jing, chapter 52", t:"Return to the mother",
+  hz:"天下有始，以為天下母。既得其母，以知其子；既知其子，復守其母。",
+  tr:"The world has a beginning: the mother of the world. Having found the mother, you know her children. Having known the children, return and keep to the mother.",
+  c:["The children are the ten thousand busy particulars: emails, filings, orders, drafts. The mother is the quiet source they all come from, your actual energy, attention, and purpose. Laozi's instruction is a rhythm: go out among the children, then return to the mother, daily, or the children eat you alive."],
+  pr:"End today with ten minutes at the source: no tasks, just returning to whatever restores you. Guard it like a filing deadline."},
+
+ {src:"I Ching, hexagram 48 · 井", t:"The town changes, the well does not",
+  hz:"改邑不改井。",
+  tr:"The town may be moved; the well cannot be moved. It neither runs dry nor overflows, and all who come may draw from it.",
+  c:["Dynasties fall, markets turn, offices relocate, and the well stays where the water is. The hexagram asks what your well is: the practice, craft, or inner source that remains yours through every reorganization of the surface.",
+     "It also carries a duty. A well exists to be drawn from. Tend the rope and the bucket, keep the water clean, and let people drink."],
+  pr:"Name your well, the one resource in you that no career change can move, and spend thirty minutes today tending it."},
+
+ {src:"Wang Wei (王維), Tang poet", t:"Sit and watch the clouds rise",
+  hz:"行到水窮處，坐看雲起時。",
+  tr:"Walk to the place where the water ends; sit, and watch the moment the clouds rise.",
+  c:["The stream runs out. In a career this looks like the stalled matter, the essay that will not move, the plan that dead-ends. Wang Wei's hermit does not turn back or force ahead. He sits down at the very point of exhaustion, and from that seat watches new weather being born.",
+     "The couplet holds a complete philosophy of impasse: the end of one form of movement is the beginning of another, visible only to someone willing to stop."],
+  pr:"When you hit a dead end today, do not immediately reroute. Sit with it for five unhurried minutes and watch what rises."},
+
+ {src:"Dao De Jing, chapter 11", t:"The usefulness of emptiness",
+  hz:"三十輻共一轂，當其無，有車之用。故有之以為利，無之以為用。",
+  tr:"Thirty spokes share one hub; it is the empty center that makes the wheel useful. What is there gives advantage; what is not there gives use.",
+  c:["A cup works because of its hollow. A room works because of the space inside its walls. A schedule obeys the same law: a day packed solid is a cup already full, and nothing new can enter it, including your own thoughts. The empty hour is where the week actually turns."],
+  pr:"Leave one hour today genuinely empty, and defend it the way you would defend a client deadline."},
+
+ {src:"Yu Xuanji (魚玄機), Tang poet and Daoist priestess", t:"Silk robes and the names on the list",
+  hz:"自恨羅衣掩詩句，舉頭空羨榜中名。",
+  tr:"Visiting the hall where the successful examination candidates posted their names, she wrote: I hate that these silk robes veil my lines of poetry. I lift my head and envy, uselessly, the names on the list.",
+  c:["Yu Xuanji was one of the most gifted poets of her century, and the examination system that made careers was closed to her because she was a woman. This couplet is twelve hundred years old and still burns: the talent is real, the door is shut, and she says so in public, in verse.",
+     "She became a Daoist priestess, one of the few roles where a woman could live by her own mind. Her poem is an ancestor for every woman who built a side door where the front door was barred."],
+  pr:"Honor her today by refusing one act of self-veiling: submit the piece, state the fee, say the ambition out loud."},
+
+ {src:"I Ching, hexagram 52 · 艮", t:"Stillness and right timing",
+  hz:"時止則止，時行則行，動靜不失其時，其道光明。",
+  tr:"When it is time to stop, stop. When it is time to move, move. When stillness and motion each keep their proper time, the way is bright and clear.",
+  c:["Gen is the mountain doubled, and its teaching is precise: stillness is a timing, not a temperament. The fault is never in moving or resting but in doing either at the wrong moment. A deliberate full stop between tasks, even thirty seconds, restores the border that makes the next movement clean."],
+  pr:"Place three deliberate stops in today: full pauses between tasks where you do nothing, then move again."},
+
+ {src:"Dao De Jing, chapter 61", t:"The female overcomes by stillness",
+  hz:"牝常以靜勝牡，以靜為下。",
+  tr:"The female constantly overcomes the male by stillness, and in her stillness she takes the lower position.",
+  c:["Laozi is describing statecraft here, how a great power should behave, and his model for the winning strategy is explicitly female: stillness plus the low position. Not passivity. A composed gravity that lets the agitated party spend themselves while you keep your center.",
+     "Anyone who has sat across a negotiating table knows this force. The person who does not need to fill the silence usually leaves with the better terms."],
+  pr:"In one tense exchange today, be the still one. Let the silence sit two beats longer than comfortable, and watch what it draws out."},
+
+ {src:"Zhuangzi, chapter 17 (秋水)", t:"The frog in the well",
+  hz:"井蛙不可以語於海者，拘於虛也。",
+  tr:"You cannot speak of the ocean to a frog in a well; it is bound by its hollow.",
+  c:["The autumn floods swell the river until its god believes he is the greatest water alive, and then he reaches the sea. Zhuangzi's compassion is that everyone, including the wise, is some size of frog in some size of well. The error is never having a well; it is forgetting the ocean exists.",
+     "Every field, every city, every feed is a well. The cure is regular contact with things larger than your circle: other literatures, other generations, the actual sky."],
+  pr:"Spend twenty minutes today deliberately outside your well: a subject, voice, or tradition you never consult."},
+
+ {src:"Sun Bu'er (孫不二), female Daoist master", t:"Stillness is the root of energy",
+  tr:"A rendering from her teachings on cultivation: People chase vitality in tonics and techniques, and spend it in noise. But energy pools in stillness the way water pools in the low field at night. Sit quietly, breathe slowly, and what you spent all day returns of itself.",
+  c:["The women's alchemy Sun Bu'er taught begins from the body's own economy: energy is not manufactured, it is conserved and allowed to gather. Her instruction was radical for its plainness. No pilgrimage required. Sit, quiet the breath, stop the leaks.",
+     "The leaks are recognizable across nine centuries: rumination, hurry, performance, the fifth unnecessary conversation. Stillness is how the field refills."],
+  pr:"Find fifteen minutes of genuine stillness today, no input, no output, and treat it as energy accounting, not laziness."},
+
+ {src:"Dao De Jing, chapter 64", t:"Handle things while small",
+  hz:"合抱之木，生於毫末。九層之臺，起於累土。千里之行，始於足下。",
+  tr:"A tree that fills your arms grows from the tiniest shoot. A nine-story tower rises from a basket of earth. A journey of a thousand li begins beneath your feet.",
+  c:["Everyone quotes the journey line as encouragement to start. But the chapter's real teaching sits earlier: deal with things while they are still small. Every large problem in a practice, a business, or a body was once a small one that felt too minor to schedule."],
+  pr:"Find the small thing you have been deferring because it is small, and handle it today, before it grows a root system."},
+
+ {src:"I Ching, hexagram 31 · 咸", t:"Receive with emptiness",
+  hz:"山上有澤，咸；君子以虛受人。",
+  tr:"A lake on the mountaintop: influence. The wise receive others with emptiness.",
+  c:["For a lake to sit on a summit, the mountain must be hollowed at the top; height alone holds no water. Xian is the hexagram of mutual attraction and real influence, and its method is that hollow: people can only pour themselves into someone who has left room.",
+     "Arrive at your next conversation already full, of advice, verdicts, your own next sentence, and nothing enters. The influential person is the receptive one. Everyone else is just broadcasting."],
+  pr:"In one conversation today, empty out first: no advice until asked, no verdict until the other person is completely finished."},
+
+ {src:"Therīgāthā · Paṭācārā's verse", t:"Water flowing downhill",
+  tr:"A rendering of the nun Paṭācārā: Washing my feet at the stream, I watched the water run down the slope, and my mind gathered the way one trains a fine horse. Later, in my hut, I lowered the lamp's wick. The flame went out, and the mind was released.",
+  c:["Paṭācārā came to the order after losing her entire family, and her awakening arrived through two completely ordinary sights: water finding its level, a lamp going out. The nuns' poems keep insisting on this, that the deepest seeing uses whatever is at hand, a stream, a wick, an evening chore.",
+     "Nothing about your day is too domestic to be the teacher. The dishes, the dog, the walk to the corner: any of them will do, if you are actually there."],
+  pr:"Choose one routine chore today and do it as full practice: only the water, only the task, nothing else invited in."},
+
+ {src:"Dao De Jing, chapter 78", t:"Nothing softer than water",
+  hz:"天下莫柔弱於水，而攻堅強者莫之能勝。",
+  tr:"Nothing in the world is softer and weaker than water, yet for wearing down the hard and strong, nothing surpasses it.",
+  c:["Everyone knows this, Laozi adds in the same chapter, and no one can practice it. That aside is the sharpest line: the truth is not hidden, it is just unbearable to act on, because soft persistence looks like losing for a long time before it looks like winning.",
+     "Water's method is time plus constancy plus taking the low route. A daily page, a weekly filing, a small kindness repeated: these are drops. The stone does not negotiate, and still it goes."],
+  pr:"Identify your one drop, the small act whose only power is repetition, and make sure it lands today."},
+
+ {src:"Zhuangzi, chapter 4 (人間世)", t:"The use of the useless",
+  hz:"人皆知有用之用，而莫知無用之用也。",
+  tr:"Everyone knows the usefulness of the useful, but no one knows the usefulness of the useless.",
+  c:["The gnarled tree the carpenters reject grows old under the open sky, while its straight siblings become planks. Being obviously useful is how you get used up. The walk with no destination, the photograph taken for no client, the reading with no deliverable: these are the useless things doing quiet, essential work."],
+  pr:"Do one thing today that produces nothing, proves nothing, and cannot be posted. Protect it from justification."},
+
+ {src:"I Ching, hexagram 53 · 漸", t:"The wild goose advances gradually",
+  hz:"山上有木，漸。",
+  tr:"On the mountain, a tree: gradual progress. The wild goose moves stage by stage, from the shore, to the rock, to the high ground, and its feathers can be used for the sacred dance.",
+  c:["A tree on a mountain cannot hurry; every ring is a year, and that is exactly why it stands where nothing else can. The hexagram's other image is the wild goose, advancing by ordered stages, each landing place secured before the next flight.",
+     "Jian is the counter-argument to every overnight story. The things you are building, a practice, a readership, a name, grow at tree speed, and tree speed is why they will hold."],
+  pr:"Look at your slowest project and honor it: mark the ring it has grown this season, and take exactly one more stage today."},
+
+ {src:"Tao Yuanming (陶淵明), poet of return", t:"Chrysanthemums by the eastern hedge",
+  hz:"採菊東籬下，悠然見南山。",
+  tr:"Picking chrysanthemums by the eastern hedge, unhurried, I catch sight of the southern mountain.",
+  c:["Tao Yuanming resigned his official post rather than bow to a visiting inspector for the sake of his salary, and went home to farm badly and write immortally. This couplet is the whole philosophy of that homecoming: the mountain appears because he was not looking for it. He was picking flowers.",
+     "The seeing that matters arrives sideways, in the middle of humble work. Guard some part of your life where you are only picking chrysanthemums."],
+  pr:"Do one small task today with total unhurried attention, and let whatever appears at the edge of it appear."},
+
+ {src:"Dao De Jing, chapter 16", t:"Returning to stillness",
+  hz:"致虛極，守靜篤。萬物並作，吾以觀復。歸根曰靜。",
+  tr:"Reach the utmost emptiness; hold fast to stillness. The ten thousand things rise together, and I watch them return. Returning to the root is called stillness.",
+  c:["Everything that rises also returns. Cases close, seasons turn, moods pass through like weather. Most agitation comes from standing too close to one moment of the arc. Step back far enough to see that this, too, is mid-cycle, and the grip loosens on its own."],
+  pr:"Sit for two minutes today and only watch, whatever is happening. No fixing, no planning, just the arc."},
+
+ {src:"Cao Wenyi (曹文逸), female Daoist master", t:"The root of life is the true breath",
+  tr:"A rendering from her Song of the Great Dao, the most celebrated Daoist text authored by a woman: Let me tell you plainly where it all begins. The stem of life has always been the true breath. Not doctrines, not exotic methods. The slow, honest breath is the door, and it has been with you since before you could ask.",
+  c:["Cao Wenyi was so respected in the Song dynasty that the emperor honored her as a Perfected One, and her long poem strips the tradition to its floor: everything starts from the breath you are already breathing. The elixir the alchemists chase is a settled respiration and a quiet heart.",
+     "It is the most portable teaching in this whole library. In the hallway before the hearing, in the queue, at the desk at midnight, the door is always three slow breaths away."],
+  pr:"Three times today, before something that matters, take three unhurried breaths and only then begin."},
+
+ {src:"I Ching, hexagram 58 · 兌", t:"Joined lakes",
+  hz:"麗澤，兌；君子以朋友講習。",
+  tr:"Two lakes joined: joy. The wise gather with friends to discuss and practice together.",
+  c:["Two lakes connected below the surface keep each other from drying out; each replenishes what the other loses to the sun. The I Ching locates durable joy exactly here, in friendship organized around learning, people who trade drafts, questions, and honest readings of each other's situations.",
+     "Solitary strength evaporates faster than it feels like it will. The joined lake is the sustainable design: find the two or three people who refill you, and be findable in return."],
+  pr:"Send one substantive message today to a friend of the mind: a question, a draft, a discovery. Refill the joined lake."},
+
+ {src:"Dao De Jing, chapter 43", t:"The softest rides the hardest",
+  hz:"天下之至柔，馳騁天下之至堅。",
+  tr:"The softest thing in the world rides freely over the hardest thing in the world.",
+  c:["Water through stone, air through everything, and, if you extend the thought, patience through bureaucracy, warmth through a cold negotiation. The character Laozi uses means to gallop, as a horse: softness does not merely survive the hard, it moves at speed across it.",
+     "When today's hard surface appears, an intransigent counterparty, a rigid rule, ask what the water would do. It never confronts the surface. It finds the pore."],
+  pr:"Meet one hard surface today with deliberate softness, warmth, patience, or humor, and note how far it carries you."},
+
+ {src:"Zhuangzi, chapter 4 (人間世)", t:"The fasting of the heart",
+  hz:"氣也者，虛而待物者也。唯道集虛。虛者，心齋也。",
+  tr:"The vital breath is an emptiness that waits for things. The Way gathers in emptiness alone. This emptiness is the fasting of the heart.",
+  c:["The fast is not from food but from the noise of your own agenda. Most of us enter hard conversations already full: full of the rebuttal, the outcome we need, the version of ourselves we intend to perform. Nothing new can land. Put it all down at the door, and you can finally hear the room."],
+  pr:"Before your next difficult conversation, spend one minute emptying: no rehearsed lines, no required outcome. Enter and listen first."},
+
+ {src:"Heart Sutra · the insight of Guanyin", t:"No hindrance, no fear",
+  hz:"心無罣礙，無罣礙故，無有恐怖，遠離顛倒夢想。",
+  tr:"The heart without entanglements: because there is nothing entangling it, there is no fear, and it moves far from upside-down dreaming.",
+  c:["The sutra draws a straight causal line: fear does not come first. Entanglement comes first, the mind snagged on outcomes, images, and imagined audiences, and fear grows on the snag. Loosen the entanglement and the fear has nothing to hold.",
+     "Upside-down dreaming is the tradition's name for mistaking the imagined catastrophe for the actual room. Tonight's dread is almost always a dream running upside down."],
+  pr:"Name the fear most present this week, then name the snag underneath it. Work on the snag, not the fear."},
+
+ {src:"Dao De Jing, chapter 25", t:"Mother of heaven and earth",
+  hz:"有物混成，先天地生。寂兮寥兮，獨立而不改，周行而不殆，可以為天下母。",
+  tr:"Something formed in wholeness, born before heaven and earth. Silent, vast, standing alone and unchanging, moving everywhere without tiring: it can be called the mother of the world.",
+  c:["Asked to name the ultimate, Laozi reaches past every king and ancestor for a maternal image: the source that generates, sustains, and asks no worship. It works everywhere and claims nothing, which is exactly why it never tires.",
+     "There is a model of authority in this verse that is neither throne nor podium: quiet, constant, generative, and utterly unbothered about credit."],
+  pr:"Do one generative act today, help something grow, and deliberately leave your name off it."},
+
+ {src:"I Ching, hexagram 32 · 恆", t:"Duration",
+  hz:"雷風，恆；君子以立不易方。",
+  tr:"Thunder and wind together: duration. The wise stand firm and do not change their direction.",
+  c:["Thunder and wind are pure movement, and yet the hexagram they form means permanence. The I Ching's idea of lasting is not stone stillness; it is a stable orbit, motion that keeps renewing around an unchanging center.",
+     "The center is your direction, the few commitments underneath the changing forms. Jobs, platforms, and formats can all change while the direction holds. Confusing the two is how people either stagnate or scatter."],
+  pr:"Write your direction in one sentence, the thing beneath all your current projects. Check today's plan against it."},
+
+ {src:"Dao De Jing, chapter 67", t:"The three treasures",
+  hz:"我有三寶，持而保之。一曰慈，二曰儉，三曰不敢為天下先。",
+  tr:"I have three treasures I hold and guard. The first is gentleness. The second is frugality. The third is not daring to rush to the front of the world.",
+  c:["Three quiet powers, each the opposite of what ambition recommends: gentleness where force is expected, spareness where excess is admired, and the patience to let others sprint ahead first. The front of the world is exposed, expensive, and often wrong about the route."],
+  pr:"Choose one treasure and practice it deliberately today, in one specific situation you can name tonight."},
+
+ {src:"Zhuangzi, chapter 2 (齊物論)", t:"One with the ten thousand things",
+  hz:"天地與我並生，而萬物與我為一。",
+  tr:"Heaven and earth were born together with me, and the ten thousand things and I are one.",
+  c:["This is not mysticism as escape; it is scale as medicine. The same processes that raised the mountains and open the flowers are running in you now. You are not a spectator holding a ticket to nature. You are nature, doing paperwork this decade.",
+     "Held for even a minute, the thought rearranges the day's proportions. The urgent email keeps its place. It just stops being the largest thing in the universe."],
+  pr:"Step outside once today, look at something older than every deadline you have, sky, tree, water, and stay one full minute."},
+
+ {src:"Dao De Jing, chapter 66", t:"Rivers and seas rule the valleys",
+  hz:"江海所以能為百谷王者，以其善下之，故能為百谷王。",
+  tr:"Rivers and seas can rule the hundred valleys because they excel at staying below them. That is why they rule the hundred valleys.",
+  c:["Every stream in the landscape works for the sea, delivers to the sea, and the sea never issued a single order. Its entire management method is position: it stayed lower, so everything came to it by nature.",
+     "Watch the people others genuinely bring things to, problems, ideas, trust. They are almost never the loudest in the room. They are the ones who made themselves safe and low to pour into."],
+  pr:"Be the sea in one relationship today: place yourself below, make it easy to bring you things, and issue no orders."},
+
+ {src:"I Ching, hexagram 24 · 復", t:"Return: rest at the turning", id:"fu",
+  hz:"雷在地中，復。先王以至日閉關，商旅不行。",
+  tr:"Thunder within the earth: return. At the winter solstice the ancient kings closed the passes; merchants and travelers did not move about.",
+  c:["Fu is one unbroken line returning beneath five broken ones: the first stir of light at the darkest point of the year. And the prescribed response is remarkable. Close the roads. Stop commerce. Protect the fragile new beginning with rest.",
+     "New energy at its birth is easily trampled, including by enthusiasm. When something is just returning in you, an idea, your health, a practice, shelter it, and schedule the rest as seriously as any filing."],
+  pr:"Identify one thing just beginning to return in your life, and give it shelter today instead of pressure."},
+
+ {src:"Dao De Jing, chapter 76", t:"The soft outlasts the hard",
+  hz:"人之生也柔弱，其死也堅強。故堅強者死之徒，柔弱者生之徒。",
+  tr:"At birth a person is soft and yielding; at death, stiff and hard. So the hard and rigid are companions of death; the soft and supple are companions of life.",
+  c:["Laozi's evidence is the body itself. Living grass bends; dead grass is brittle. Rigidity in opinions, plans, and self-image feels like strength and photographs like strength. But watch what actually survives contact with reality: the people and plans that can still flex."],
+  pr:"Notice today where your voice or shoulders go hard, and soften there first. The mind tends to follow the body down."},
+
+ {src:"Dao De Jing, chapter 15", t:"Letting the mud settle",
+  hz:"孰能濁以靜之徐清？孰能安以動之徐生？",
+  tr:"Who can wait, quietly still, while the muddy water slowly clears? Who can remain settled until the moment of action, and let the right movement slowly arise?",
+  c:["Stir a muddied jar and it stays opaque. Set it down, and clarity happens on its own schedule, from the bottom up. Half the bad decisions in any career are made while the water is still cloudy, because waiting felt unbearable or looked like weakness. And when the water clears, move without hesitating."],
+  pr:"Take one decision you are being pressed on, and if the water is still muddy, formally postpone it until it clears."},
+];
+
+const SEASONAL = {
+ spring: {src:"Yellow Emperor's Inner Classic · 四氣調神大論", t:"Spring: unfolding what was stored",
+  hz:"春三月，此謂發陳。",
+  tr:"The three months of spring are called unfolding the old and bringing forth the new. Heaven and earth together give birth, and the ten thousand things flourish. Sleep at nightfall, rise early, walk widely in the courtyard, loosen the hair, ease the body, and let intentions come to life.",
+  c:["The classic of Chinese medicine reads the year as a curriculum for the body. Spring's assignment is generative: let plans germinate, reward growth rather than punishing faults, give rather than take. What you stored all winter now wants a direction.",
+     "Its warning is specific too: crush the spring impulse, in the body or in a plan, and summer arrives with nothing to ripen."],
+  pr:"Today, the season opens: plant one intention for the quarter and take its first small step before sunset."},
+ summer: {src:"Yellow Emperor's Inner Classic · 四氣調神大論", t:"Summer: the season of flourishing",
+  hz:"夏三月，此謂蕃秀。",
+  tr:"The three months of summer are called luxuriant blossoming. The energies of heaven and earth interweave, and the ten thousand things flower and bear. Sleep late in the evening, rise with the sun, do not resent the long days, and let the spirit bloom outward without anger.",
+  c:["Summer's instruction is expressive: this is the season to show the work, meet the people, let energy move outward the way the plants do. The classic's one caution is heat of temper, anger spends in a day what the season gives in a month.",
+     "Bloom, in other words, but do not burn. The long light is for ripening, and ripening cannot be rushed."],
+  pr:"Today, the season opens: choose one piece of your work to bring into the open this quarter, and take the first outward step."},
+ autumn: {src:"Yellow Emperor's Inner Classic · 四氣調神大論", t:"Autumn: gathering and composure",
+  hz:"秋三月，此謂容平。",
+  tr:"The three months of autumn are called composure and balance. The air of heaven grows brisk and the air of earth grows clear. Sleep early, rise with the rooster, keep the mind calm and gathered, and let the spirit draw inward, so the harvest of the year is not scattered.",
+  c:["Autumn's assignment reverses summer's: stop expanding, start gathering. Finish things. Bring drafts to done, close open loops, bank what the year has grown. The classic ties this to the lungs and to grief, the emotion of letting go, because gathering always means releasing what will not be kept.",
+     "Composure is the season's exact word. Not sadness, not hurry: the settled dignity of a field after harvest."],
+  pr:"Today, the season opens: list what this year has grown, choose what to finish and what to release, and finish one thing."},
+ winter: {src:"Yellow Emperor's Inner Classic · 四氣調神大論", t:"Winter: the sealed and stored",
+  hz:"冬三月，此謂閉藏。",
+  tr:"The three months of winter are called shutting and storing. Water freezes and the earth cracks. Sleep early, rise late, wait for the sun. Keep the will hidden and quiet, as if guarding a secret; avoid the cold, keep warm, and do not let the stores leak away.",
+  c:["Winter's instruction is conservation, and the classic is blunt: those who scatter themselves in winter have nothing to unfold in spring. Rest is not a pause in the year's work. It is a full quarter of the work.",
+     "Keep the will hidden as if guarding a secret: plans incubate best unannounced, in the warm dark, like everything else alive in this season."],
+  pr:"Today, the season opens: choose what you will deliberately store this quarter, energy, money, an idea, and seal it against leaks."}
+};
+
+/* ============ helpers ============ */
+const uid = () => Math.random().toString(36).slice(2,9);
+const pad = n => String(n).padStart(2,"0");
+const todayStr = () => { const d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); };
+const dayOfYear = d => Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
+function currentTerm(date){
+  let found = TERMS[TERMS.length-1];
+  for(const t of TERMS){ if(new Date(date.getFullYear(), t[0]-1, t[1]) <= date) found = t; }
+  return found;
+}
+function h(tag, props, ...kids){
+  const e = document.createElement(tag);
+  if(props) for(const [k,v] of Object.entries(props)){
+    if(k === "style") Object.assign(e.style, v);
+    else if(k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if(k === "value") e.value = v;
+    else if(k === "className") e.className = v;
+    else e.setAttribute(k, v);
+  }
+  for(const kid of kids.flat(Infinity)){
+    if(kid === null || kid === undefined || kid === false) continue;
+    e.append(kid.nodeType ? kid : document.createTextNode(kid));
+  }
+  return e;
+}
+
+/* ============ state ============ */
+const DEFAULTS = () => ({
+  intentions: { date: todayStr(), items: [{text:"",done:false},{text:"",done:false},{text:"",done:false}] },
+  ideas: [], writing: [], journal: [], writingLog: []
+});
+let S = DEFAULTS();
+let tab = "today";
+let ideaFilter = "all", ideaOpen = null, pieceOpen = null;
+let storageOK = true;
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw) S = Object.assign(DEFAULTS(), JSON.parse(raw));
+    localStorage.setItem("__sw_test","1"); localStorage.removeItem("__sw_test");
+  }catch(e){ storageOK = false; }
+  if(S.intentions.date !== todayStr()) S.intentions = DEFAULTS().intentions;
+  document.getElementById("banner").classList.toggle("show", !storageOK);
+}
+let saveTimer = null;
+function save(){
+  clearTimeout(saveTimer);
+  setSaveState("saving…", false);
+  saveTimer = setTimeout(flush, 150);
+}
+function flush(){
+  try{
+    localStorage.setItem(KEY, JSON.stringify(S));
+    setSaveState("saved ✓", false);
+    storageOK = true;
+    document.getElementById("banner").classList.remove("show");
+  }catch(e){
+    setSaveState("NOT SAVING", true);
+    storageOK = false;
+    document.getElementById("banner").classList.add("show");
+  }
+}
+function setSaveState(txt, err){
+  const el = document.getElementById("saveState");
+  el.textContent = txt; el.classList.toggle("err", err);
+}
+window.addEventListener("pagehide", flush);
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "hidden") flush(); });
+
+/* ============ derived ============ */
+function streak(){
+  const set = new Set(S.writingLog);
+  let count = 0; const d = new Date();
+  if(!set.has(todayStr())) d.setDate(d.getDate()-1);
+  for(;;){
+    const s = d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+    if(set.has(s)){ count++; d.setDate(d.getDate()-1); } else break;
+  }
+  return count;
+}
+
+/* ============ views ============ */
+function label(t){ return h("div",{className:"label"}, t); }
+
+function pickReading(date){
+  const m = date.getMonth()+1, d = date.getDate();
+  if(m===12 && d===22){
+    const fu = READINGS.filter(x => x.id==="fu")[0];
+    return {r: fu, birthday: true};
+  }
+  if(m===2 && d===4) return {r: SEASONAL.spring, seasonal: true};
+  if(m===5 && d===5) return {r: SEASONAL.summer, seasonal: true};
+  if(m===8 && d===7) return {r: SEASONAL.autumn, seasonal: true};
+  if(m===11 && d===7) return {r: SEASONAL.winter, seasonal: true};
+  let i = dayOfYear(date) % READINGS.length;
+  let r = READINGS[i];
+  if(r.id === "fu" && m === 12 && (d === 21 || d === 23)) r = READINGS[(i+7) % READINGS.length];
+  return {r: r};
+}
+function readingCard(showReflect){
+  const now = new Date();
+  const pick = pickReading(now);
+  const r = pick.r;
+  const tomorrow = pickReading(new Date(now.getTime() + 86400000)).r;
+  return h("div",{className:"card accent"},
+    label("Today's reading · " + r.src),
+    pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",
+      fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
+      "Winter Solstice, the day you were born. The year turns where you began; 復, the return of light, is yours.") : null,
+    r.hz ? h("div",{style:{fontFamily:"'Songti TC','Songti SC','Kaiti SC',serif",fontSize:"19px",
+      lineHeight:"1.65",marginBottom:"10px"}}, r.hz) : null,
+    h("div",{style:{fontSize:"15px",lineHeight:"1.55",marginBottom:"10px"}}, r.tr),
+    r.c.map(p => h("div",{className:"faint",style:{fontSize:"14px",lineHeight:"1.55",
+      marginBottom:"10px"}}, p)),
+    h("div",{style:{borderTop:"1px solid var(--line)",margin:"12px 0",height:"1px"}}),
+    h("div",{style:{fontSize:"14px",lineHeight:"1.5"}},
+      h("span",{style:{fontFamily:"'Marcellus',serif",fontSize:"11px",letterSpacing:".15em",
+        textTransform:"uppercase",color:"var(--seal)"}},"Practice · "), r.pr),
+    showReflect ? h("div",{className:"row mt10"},
+      h("button",{className:"btn seal",onclick:() => {
+        tab = "practice"; render(); window.scrollTo(0,0);
+        setTimeout(() => { const el = document.getElementById("reflectTa"); if(el) el.focus(); }, 60);
+      }},"Reflect on this")) : null,
+    h("div",{className:"tiny faint mt10"},
+      "Tomorrow: " + tomorrow.t + " · Library of " + READINGS.length + " readings"));
+}
+
+function viewToday(){
+  const now = new Date();
+  const t = currentTerm(now);
+  const dateLine = now.toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric"});
+  const placeholders = ["The one thing that matters","A steady second","A small kindness to future you"];
+
+  const intentions = S.intentions.items.map((it,i) => {
+    const inp = h("input",{type:"text",placeholder:placeholders[i],value:it.text,
+      oninput:e => { it.text = e.target.value; save(); }});
+    if(it.done) inp.classList.add("done-text");
+    const tick = h("button",{className:"tick"+(it.done?" done":""),
+      onclick:() => { it.done = !it.done; save(); render(); }}, it.done?"✓":"");
+    return h("div",{className:"intention"}, tick, inp);
+  });
+
+  const cap = h("input",{type:"text",placeholder:"A passing thought, before it passes"});
+  const keep = () => {
+    if(!cap.value.trim()) return;
+    S.ideas.unshift({id:uid(), text:cap.value.trim(), tag:"life", created:todayStr()});
+    cap.value = ""; save();
+  };
+  cap.addEventListener("keydown", e => { if(e.key === "Enter") keep(); });
+
+  return [
+    h("div",{className:"card term"},
+      h("div",{className:"hz"}, t[2]),
+      h("div",{}, label(dateLine),
+        h("div",{className:"name"}, t[3]),
+        h("div",{className:"faint italic small mt8",style:{fontSize:"14px"}}, t[4]))),
+    h("div",{className:"card"}, label("Three intentions"), intentions),
+    h("div",{className:"card"}, label("Quick capture"),
+      h("div",{className:"row"}, cap, h("button",{className:"btn",onclick:keep},"Keep")),
+      h("div",{className:"tiny faint mt8"},"Lands in Ideas, tagged life. Sort it later.")),
+    readingCard(true)
+  ];
+}
+
+function viewIdeas(){
+  let newTag = "writing";
+  const ta = h("textarea",{rows:2,placeholder:"Write it rough. Rough is enough."});
+  const tagChips = TAGS.map(t => h("button",{className:"chip"+(t===newTag?" on":""),
+    onclick:e => { newTag = t;
+      e.target.parentElement.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+      e.target.classList.add("on"); }}, t));
+  const add = () => {
+    if(!ta.value.trim()) return;
+    S.ideas.unshift({id:uid(), text:ta.value.trim(), tag:newTag, created:todayStr()});
+    ta.value = ""; save(); render();
+  };
+  const filterChips = ["all",...TAGS].map(t => h("button",
+    {className:"chip"+(t===ideaFilter?" on cel":""),
+     onclick:() => { ideaFilter = t; render(); }}, t));
+
+  const shown = S.ideas.filter(x => ideaFilter==="all" || x.tag===ideaFilter);
+  const cards = shown.length ? shown.map(idea => {
+    const head = h("div",{style:{cursor:"pointer"},
+      onclick:() => { ideaOpen = ideaOpen===idea.id ? null : idea.id; render(); }},
+      h("div",{className:"row",style:{justifyContent:"space-between",alignItems:"flex-start"}},
+        h("span",{style:{lineHeight:"1.4"}}, idea.text),
+        h("span",{className:"tiny",style:{color:"var(--seal)",fontFamily:"'Marcellus',serif",flexShrink:0}}, idea.tag)),
+      h("div",{className:"tiny faint mt8",style:{marginTop:"4px"}}, idea.created));
+    let detail = null;
+    if(ideaOpen === idea.id){
+      const edit = h("textarea",{rows:3,value:idea.text,
+        oninput:e => { idea.text = e.target.value; save(); }});
+      const chips = TAGS.map(t => h("button",{className:"chip"+(idea.tag===t?" on":""),
+        style:{fontSize:"11px",padding:"4px 10px"},
+        onclick:() => { idea.tag = t; save(); render(); }}, t));
+      detail = h("div",{className:"detail"}, edit,
+        h("div",{className:"row wrap mt8"}, chips),
+        h("div",{className:"row mt10"},
+          h("button",{className:"btn",style:{flex:1},onclick:() => {
+            S.writing.unshift({id:uid(), title:idea.text.slice(0,60), type:"essay",
+              status:"seed", note:idea.text, updated:todayStr()});
+            S.ideas = S.ideas.filter(x => x.id !== idea.id);
+            ideaOpen = null; save(); tab = "writing"; render();
+          }},"Send to Writing"),
+          h("button",{className:"btn danger",onclick:() => {
+            S.ideas = S.ideas.filter(x => x.id !== idea.id); save(); render();
+          }},"Delete")));
+    }
+    return h("div",{className:"card",style:{padding:"12px"}}, head, detail);
+  }) : [h("div",{className:"empty"},"Nothing here yet. An empty inbox is a clear mind.")];
+
+  return [
+    h("div",{className:"card"}, label("New idea"), ta,
+      h("div",{className:"row wrap mt8"}, tagChips,
+        h("button",{className:"btn seal",style:{marginLeft:"auto"},onclick:add},"Keep"))),
+    h("div",{className:"row wrap mb12"}, filterChips),
+    cards
+  ];
+}
+
+function viewWriting(){
+  let newType = "essay";
+  const st = streak(), wrote = S.writingLog.includes(todayStr());
+  const title = h("input",{type:"text",placeholder:"Working title, however plain"});
+  const typeChips = ["essay","fiction"].map(t => h("button",
+    {className:"chip"+(t===newType?" on":""),
+     onclick:e => { newType = t;
+       e.target.parentElement.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+       e.target.classList.add("on"); }}, t));
+  const add = () => {
+    if(!title.value.trim()) return;
+    S.writing.unshift({id:uid(), title:title.value.trim(), type:newType,
+      status:"seed", note:"", updated:todayStr()});
+    title.value = ""; save(); render();
+  };
+  title.addEventListener("keydown", e => { if(e.key === "Enter") add(); });
+
+  const cards = S.writing.length ? S.writing.map(p => {
+    const statusBtn = h("button",{className:"status",
+      style:{background:STATUS_COLOR[p.status]},
+      onclick:() => { p.status = STATUSES[(STATUSES.indexOf(p.status)+1)%STATUSES.length];
+        p.updated = todayStr(); save(); render(); }}, p.status);
+    const head = h("div",{className:"row"},
+      statusBtn,
+      h("div",{style:{flex:1,cursor:"pointer"},
+        onclick:() => { pieceOpen = pieceOpen===p.id ? null : p.id; render(); }},
+        h("div",{}, p.title),
+        h("div",{className:"tiny faint"}, p.type + " · touched " + p.updated)));
+    let detail = null;
+    if(pieceOpen === p.id){
+      const ti = h("input",{type:"text",value:p.title,
+        oninput:e => { p.title = e.target.value; p.updated = todayStr(); save(); }});
+      const no = h("textarea",{rows:4,value:p.note,
+        placeholder:"Angle, fragments, the sentence you're circling…",
+        oninput:e => { p.note = e.target.value; p.updated = todayStr(); save(); }});
+      detail = h("div",{className:"detail"}, ti, h("div",{className:"mt8"}, no),
+        h("div",{className:"row mt8"},
+          h("button",{className:"btn ghost",style:{flex:1},onclick:() => {
+            p.type = p.type==="essay" ? "fiction" : "essay"; save(); render();
+          }},"Switch to " + (p.type==="essay"?"fiction":"essay")),
+          h("button",{className:"btn danger",onclick:() => {
+            S.writing = S.writing.filter(x => x.id !== p.id); save(); render();
+          }},"Delete")));
+    }
+    return h("div",{className:"card",style:{padding:"12px"}}, head, detail);
+  }) : [h("div",{className:"empty"},"No pieces yet. Send an idea over, or plant one here.")];
+
+  return [
+    h("div",{className:"card row",style:{gap:"14px"}},
+      h("div",{className:"streakNum",style:{color: st>0 ? "var(--seal)" : "var(--faint)"}}, String(st)),
+      h("div",{style:{flex:1}},
+        h("div",{style:{fontFamily:"'Marcellus',serif",fontSize:"13px"}},"day writing streak"),
+        h("div",{className:"tiny faint"},"Any words count. Consistency over volume.")),
+      wrote
+        ? h("button",{className:"btn ghost",style:{color:"var(--celadon)",borderColor:"var(--celadon)"},disabled:""},"✓ wrote")
+        : h("button",{className:"btn seal",onclick:() => { S.writingLog.push(todayStr()); save(); render(); }},"I wrote today")),
+    h("div",{className:"card"}, label("New piece"), title,
+      h("div",{className:"row mt8"}, typeChips,
+        h("button",{className:"btn seal",style:{marginLeft:"auto"},onclick:add},"Plant"))),
+    cards
+  ];
+}
+
+function viewPractice(){
+  const ta = h("textarea",{rows:4,id:"reflectTa",placeholder:"What settled today? What is still stirring?"});
+  const keep = () => {
+    if(!ta.value.trim()) return;
+    S.journal.unshift({id:uid(), date:todayStr(), text:ta.value.trim()});
+    ta.value = ""; save(); render();
+  };
+  const entries = S.journal.map(j =>
+    h("div",{className:"card",style:{padding:"12px"}},
+      h("div",{className:"row",style:{justifyContent:"space-between"}},
+        h("span",{className:"small",style:{fontFamily:"'Marcellus',serif",color:"var(--seal)",fontSize:"12px"}}, j.date),
+        h("button",{style:{background:"none",border:"none",color:"var(--faint)",fontSize:"11px"},
+          onclick:() => { S.journal = S.journal.filter(x => x.id !== j.id); save(); render(); }},"remove")),
+      h("div",{className:"mt8",style:{whiteSpace:"pre-wrap",fontSize:"14px",lineHeight:"1.55"}}, j.text)));
+
+  return [
+    readingCard(),
+    h("div",{className:"card"}, label("Reflection"), ta,
+      h("div",{className:"mt8"}, h("button",{className:"btn",onclick:keep},"Keep this"))),
+    entries
+  ];
+}
+
+/* ============ sync ============ */
+function openSync(){
+  const sheet = document.getElementById("sheet");
+  sheet.replaceChildren();
+  const exportStr = JSON.stringify(S, null, 2);
+  const msg = h("div",{className:"msg"});
+  const say = t => { msg.textContent = t; msg.classList.add("show"); };
+
+  const out = h("textarea",{rows:4,readonly:"",className:"mono",value:exportStr,
+    style:{background:"var(--card)",color:"var(--faint)"},
+    onfocus:e => e.target.select()});
+  const inp = h("textarea",{rows:4,className:"mono",
+    placeholder:"Paste your backup text here, or choose a file below.",
+    style:{background:"var(--card)"}});
+  const file = h("input",{type:"file",accept:"application/json,.json",style:{display:"none"},
+    onchange:e => {
+      const f = e.target.files && e.target.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = () => { inp.value = String(r.result); say("File read. Review, then Load."); };
+      r.readAsText(f);
+    }});
+
+  sheet.append(
+    h("div",{className:"row",style:{justifyContent:"space-between",marginBottom:"6px"}},
+      h("div",{style:{fontFamily:"'Marcellus',serif",fontSize:"19px"}},"Sync and backup"),
+      h("button",{style:{background:"none",border:"none",fontSize:"22px",color:"var(--faint)"},
+        onclick:closeSync},"×")),
+    h("div",{className:"small faint",style:{marginBottom:"16px",lineHeight:"1.5"}},
+      "Copy or download your data here, then load it on another device. The device you Load onto is overwritten, so always carry the newest copy forward."),
+    msg,
+    label("Send from this device"), out,
+    h("div",{className:"row mt8",style:{marginBottom:"22px"}},
+      h("button",{className:"btn",style:{flex:1},onclick:async () => {
+        try{ await navigator.clipboard.writeText(exportStr); say("Copied. Paste it on your other device."); }
+        catch(e){ say("Copy blocked. Select the text and copy by hand."); }
+      }},"Copy text"),
+      h("button",{className:"btn ghost",style:{flex:1},onclick:() => {
+        try{
+          const blob = new Blob([exportStr],{type:"application/json"});
+          const url = URL.createObjectURL(blob);
+          const a = h("a",{href:url,download:"still-water-"+todayStr()+".json"});
+          document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+          say("File saved.");
+        }catch(e){ say("Download blocked here. Use Copy instead."); }
+      }},"Download file")),
+    label("Load onto this device"), inp,
+    h("div",{className:"row mt8"},
+      h("label",{className:"btn ghost",style:{flex:1,textAlign:"center"}},"Choose file", file),
+      h("button",{className:"btn seal",style:{flex:1},onclick:() => {
+        if(!inp.value.trim()){ say("Paste your backup text first."); return; }
+        let parsed;
+        try{ parsed = JSON.parse(inp.value); }
+        catch(e){ say("That text is not valid. Check the paste and try again."); return; }
+        if(typeof parsed !== "object" || parsed === null || Array.isArray(parsed)){
+          say("That does not look like a Still Water backup."); return; }
+        if(!confirm("This replaces everything currently on this device. Continue?")) return;
+        S = Object.assign(DEFAULTS(), parsed);
+        if(S.intentions.date !== todayStr()) S.intentions = DEFAULTS().intentions;
+        save(); render(); closeSync();
+      }},"Load")));
+  document.getElementById("modal").classList.add("show");
+}
+function closeSync(){ document.getElementById("modal").classList.remove("show"); }
+document.getElementById("modal").addEventListener("click", e => {
+  if(e.target.id === "modal") closeSync();
+});
+document.getElementById("syncBtn").addEventListener("click", openSync);
+
+/* ============ shell ============ */
+const NAV = [["today","今","Today"],["ideas","思","Ideas"],["writing","書","Writing"],["practice","心","Practice"]];
+function renderNav(){
+  const row = document.getElementById("navrow");
+  row.replaceChildren(...NAV.map(([id,ch,lbl]) =>
+    h("button",{className:"navbtn"+(tab===id?" on":""),
+      onclick:() => { tab = id; render(); window.scrollTo(0,0); }},
+      h("span",{className:"sealch"}, ch),
+      h("span",{className:"navlbl"}, lbl))));
+}
+function render(){
+  const view = document.getElementById("view");
+  const content = tab==="today" ? viewToday()
+    : tab==="ideas" ? viewIdeas()
+    : tab==="writing" ? viewWriting()
+    : viewPractice();
+  view.replaceChildren(...content.flat());
+  renderNav();
+}
+load();
+render();
+</script>
+</body>
+</html>
