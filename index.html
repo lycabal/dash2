@@ -6,14 +6,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Still Water" />
-<meta name="theme-color" content="#EDEFE8" />
+<meta name="theme-color" content="#E9EBDB" />
 <title>Still Water</title>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23A63B2A'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23EDEFE8' font-family='serif'%3E水%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23A63B2A'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23E9EBDB' font-family='serif'%3E水%3C/text%3E%3C/svg%3E" />
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 :root{
-  --paper:#EDEFE8; --card:#F4F5F0; --ink:#232F2A; --faint:#5C6A62;
-  --line:#C9CFC2; --seal:#A63B2A; --celadon:#8CA18C; --gold:#A9884F;
+  --paper:#E9EBDB; --card:#F2F3E7; --ink:#242F26; --faint:#5A6654;
+  --line:#C7CCB2; --seal:#A63B2A; --celadon:#8CA18C; --gold:#A9884F;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 body{margin:0; background:var(--paper); color:var(--ink);
@@ -36,7 +36,7 @@ main{max-width:640px; margin:0 auto; padding:12px 16px 100px;}
 .card.accent{border-left:3px solid var(--seal);}
 .label{font-family:'Marcellus', serif; font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
-.banner{background:#F6E8E4; border:1px solid var(--seal); border-radius:6px;
+.banner{background:#F3E6E0; border:1px solid var(--seal); border-radius:6px;
   padding:10px 14px; margin-bottom:14px; font-size:13px; display:none;}
 .banner.show{display:block;}
 input[type=text], textarea{width:100%; border:1px solid var(--line);
@@ -51,30 +51,36 @@ button{font-family:'Marcellus', serif; cursor:pointer;}
 .btn.seal{background:var(--seal);}
 .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
 .btn.danger{background:transparent; color:var(--seal); border:1px solid var(--seal);}
-.chip{padding:5px 12px; border-radius:14px; border:1px solid var(--line);
-  background:transparent; color:var(--faint); font-size:12px;}
+.chip{padding:6px 13px; border-radius:14px; border:1px solid var(--line);
+  background:transparent; color:var(--faint); font-size:13px;
+  font-family:'Spectral', serif;}
+.chip .cz{font-family:'Songti TC','Songti SC',serif; margin-right:5px;}
 .chip.on{background:var(--ink); color:var(--paper); border-color:var(--ink);}
-.chip.on.cel{background:var(--celadon); border-color:var(--celadon);}
 .row{display:flex; gap:8px; align-items:center;}
 .wrap{flex-wrap:wrap;}
 .mt8{margin-top:8px;} .mt10{margin-top:10px;} .mb12{margin-bottom:12px;}
 .faint{color:var(--faint);} .small{font-size:12px;} .tiny{font-size:11px;}
 .italic{font-style:italic;}
-.intention{display:flex; gap:10px; align-items:center; margin-bottom:8px;}
-.intention input{border:none; border-bottom:1px solid var(--line);
-  border-radius:0; background:transparent; padding:4px 0;}
-.tick{width:22px; height:22px; border-radius:4px; border:1.5px solid var(--line);
-  background:transparent; color:var(--paper); font-size:13px; flex-shrink:0;}
-.tick.done{background:var(--seal); border-color:var(--seal);}
-.done-text{color:var(--faint); text-decoration:line-through;}
 .term{display:flex; gap:16px;}
 .term .hz{writing-mode:vertical-rl; font-size:26px; letter-spacing:.2em;
   color:var(--seal); font-weight:500; border-right:1px solid var(--line);
-  padding-right:12px;}
+  padding-right:12px; font-family:'Songti TC','Songti SC',serif;}
 .term .name{font-family:'Marcellus', serif; font-size:20px;}
-.status{font-size:11px; font-family:'Marcellus', serif; color:var(--paper);
-  border:none; border-radius:12px; padding:4px 10px; flex-shrink:0;}
-.streakNum{font-family:'Marcellus', serif; font-size:34px; line-height:1;}
+.prog{height:3px; background:var(--paper); border:1px solid var(--line);
+  border-radius:2px; margin-top:9px; overflow:hidden;}
+.prog .fill{height:100%; background:var(--celadon);}
+.hanzi{font-family:'Songti TC','Songti SC','Kaiti SC',serif; font-size:19px;
+  line-height:1.65; margin-bottom:10px;}
+.stamp{display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; background:var(--seal); color:var(--paper);
+  border-radius:4px; font-family:'Songti TC','Songti SC',serif; font-size:15px;
+  flex-shrink:0;}
+.kept-item{padding:9px 0; border-bottom:1px solid var(--line);}
+.kept-item:last-child{border-bottom:none; padding-bottom:0;}
+.refl{padding:12px; }
+.frag{font-style:italic; color:var(--faint);}
+.wstrip{font-family:'Songti TC','Songti SC',serif; font-size:16px;
+  letter-spacing:.35em; color:var(--seal);}
 .empty{text-align:center; color:var(--faint); font-style:italic; padding:32px 0;
   font-size:14px;}
 .detail{margin-top:10px; border-top:1px solid var(--line); padding-top:10px;}
@@ -86,12 +92,13 @@ nav{position:fixed; bottom:0; left:0; right:0; background:var(--card);
   align-items:center; gap:4px;}
 .sealch{display:inline-flex; align-items:center; justify-content:center;
   width:34px; height:34px; border-radius:5px; border:1.5px solid var(--line);
-  color:var(--faint); font-size:17px; transition:all .18s ease;}
+  color:var(--faint); font-size:17px; transition:all .18s ease;
+  font-family:'Songti TC','Songti SC',serif;}
 .navbtn.on .sealch{background:var(--seal); border-color:var(--seal); color:var(--paper);}
 .navlbl{font-family:'Marcellus', serif; font-size:10px; letter-spacing:.1em;
   color:var(--faint);}
 .navbtn.on .navlbl{color:var(--ink);}
-#modal{position:fixed; inset:0; background:rgba(35,47,42,.45); z-index:50;
+#modal{position:fixed; inset:0; background:rgba(36,47,38,.45); z-index:50;
   display:none; align-items:flex-end; justify-content:center;}
 #modal.show{display:flex;}
 .sheet{background:var(--paper); border-radius:16px 16px 0 0; width:100%;
@@ -128,36 +135,41 @@ nav{position:fixed; bottom:0; left:0; right:0; background:var(--card);
 <script>
 "use strict";
 /* ============ constants ============ */
-const KEY = "still-water-v1";
-const TAGS = ["law","business","writing","life"];
-const STATUSES = ["seed","drafting","editing","published"];
-const STATUS_COLOR = {seed:"var(--celadon)", drafting:"var(--gold)", editing:"var(--seal)", published:"var(--ink)"};
+const KEY = "still-water-v2";
+const OLDKEY = "still-water-v1";
 
 const TERMS = [
- [1,5,"小寒","Minor Cold","The year's quietest stretch. Conserve, do not push."],
- [1,20,"大寒","Major Cold","Deep cold before turning. Endings are almost beginnings."],
- [2,4,"立春","Start of Spring","First stirring under the surface. Plant intentions, not deadlines."],
- [2,19,"雨水","Rain Water","Softening. Let plans absorb slowly, like rain into soil."],
- [3,5,"驚蟄","Awakening of Insects","Dormant things wake. Revisit shelved ideas."],
- [3,20,"春分","Spring Equinox","Light and dark in balance. Check what is overweighted."],
- [4,5,"清明","Clear and Bright","Clarity season. Clean the desk, the docket, the mind."],
- [4,20,"穀雨","Grain Rain","Steady nourishment. Feed the projects already planted."],
- [5,5,"立夏","Start of Summer","Growth becomes visible. Show work in progress."],
- [5,21,"小滿","Grain Buds","Full but not yet ripe. Resist harvesting early."],
- [6,5,"芒種","Grain in Ear","The busy season. Work with rhythm, not urgency."],
- [6,21,"夏至","Summer Solstice","Peak light. Yin quietly begins its return."],
- [7,7,"小暑","Minor Heat","Heat rises. Move slower on purpose; mornings are yours."],
- [7,22,"大暑","Major Heat","Fullest heat. Do less, but do it completely."],
- [8,7,"立秋","Start of Autumn","A turn you can feel before you can see. Begin refining."],
- [8,23,"處暑","End of Heat","Heat withdraws. Release what the summer accumulated."],
- [9,7,"白露","White Dew","First coolness. Precision returns; edit, condense."],
- [9,23,"秋分","Autumn Equinox","Balance again. Gather what is finished."],
- [10,8,"寒露","Cold Dew","Crisp air, clear thought. Good season for hard problems."],
- [10,23,"霜降","Frost's Descent","First frost. Decide what will not survive the year."],
- [11,7,"立冬","Start of Winter","Storing season. Consolidate, document, archive."],
- [11,22,"小雪","Minor Snow","Quiet accumulation. Small daily deposits compound."],
- [12,7,"大雪","Major Snow","Cover and protect. Guard your energy and your evenings."],
- [12,21,"冬至","Winter Solstice","Deepest dark; light returns. Rest is generative."]
+ [1,5,"小寒","Minor Cold",["The year's quietest stretch. Conserve, do not push.","Small cold, small fires. Keep the kettle close.","Deep winter teaches by subtraction."]],
+ [1,20,"大寒","Major Cold",["Deep cold before turning. Endings are almost beginnings.","The coldest days walk beside the year's turning.","Hold still; the thaw is already scheduled."]],
+ [2,4,"立春","Start of Spring",["First stirring under the surface. Plant intentions, not deadlines.","The east wind loosens the ice from underneath first.","Beginnings stay invisible for weeks. Trust them anyway."]],
+ [2,19,"雨水","Rain Water",["Softening. Let plans absorb slowly, like rain into soil.","Rain finds every seed you forgot you planted.","Soft water, patient work."]],
+ [3,5,"驚蟄","Awakening of Insects",["Dormant things wake. Revisit shelved ideas.","Thunder wakes what winter tucked away.","Old ideas stir. Open the notebook."]],
+ [3,20,"春分","Spring Equinox",["Light and dark in balance. Check what is overweighted.","Equal light, equal dark. Audit the balance.","The middle of spring is a level place. Stand on it."]],
+ [4,5,"清明","Clear and Bright",["Clarity season. Clean the desk, the docket, the mind.","Clear skies ask for clear desks.","Honor what came before, then take the walk."]],
+ [4,20,"穀雨","Grain Rain",["Steady nourishment. Feed the projects already planted.","The last spring rain feeds a hundred quiet roots.","Nourish what is growing before planting more."]],
+ [5,5,"立夏","Start of Summer",["Growth becomes visible. Show work in progress.","The green turns serious now.","Bring one shoot of your work into the sun."]],
+ [5,21,"小滿","Grain Buds",["Full but not yet ripe. Resist harvesting early.","Grains fill but do not ripen. Neither should you rush.","Almost-full is its own complete season."]],
+ [6,5,"芒種","Grain in Ear",["The busy season. Work with rhythm, not urgency.","Plant what must be planted; the window is real.","Busy hands, unhurried heart."]],
+ [6,21,"夏至","Summer Solstice",["Peak light. Yin quietly begins its return.","The longest light carries the first seed of dark.","At the peak, practice descent."]],
+ [7,7,"小暑","Minor Heat",["Heat rises. Move slower on purpose; mornings are yours.","Cicadas keep the hours now. Work before the heat does.","Small heat asks for small, cool disciplines."]],
+ [7,22,"大暑","Major Heat",["Fullest heat. Do less, but do it completely.","The year's fiercest days ripen its sweetest fruit.","Shade is a strategy, not a retreat."]],
+ [8,7,"立秋","Start of Autumn",["A turn you can feel before you can see. Begin refining.","One cool morning changes the whole conversation.","Begin trimming what summer overgrew."]],
+ [8,23,"處暑","End of Heat",["Heat withdraws. Release what the summer accumulated.","The heat withdraws its army slowly.","Store the summer's lessons before they fade."]],
+ [9,7,"白露","White Dew",["First coolness. Precision returns; edit, condense.","Dew on the grass: precision returning to the world.","Cool nights sharpen sentences."]],
+ [9,23,"秋分","Autumn Equinox",["Balance again. Gather what is finished.","Harvest what is honestly finished.","Day and night shake hands and part."]],
+ [10,8,"寒露","Cold Dew",["Crisp air, clear thought. Good season for hard problems.","Geese leave; note what you should release.","Chrysanthemums open when everything else closes."]],
+ [10,23,"霜降","Frost's Descent",["First frost. Decide what will not survive the year.","Frost edits the garden without sentiment.","Decide what will not cross into winter with you."]],
+ [11,7,"立冬","Start of Winter",["Storing season. Consolidate, document, archive.","The door of the year begins to close. Stock the shelves.","Winter rewards those who filed early."]],
+ [11,22,"小雪","Minor Snow",["Quiet accumulation. Small daily deposits compound.","First snow: small deposits, quietly compounding.","Dim season, warm lamps, long thoughts."]],
+ [12,7,"大雪","Major Snow",["Cover and protect. Guard your energy and your evenings.","Snow covers to protect. Cover your energy too.","The deep drift keeps next year's water."]],
+ [12,21,"冬至","Winter Solstice",["Deepest dark; light returns. Rest is generative.","The darkest day carries the first returning light.","Close the passes. Rest is the assignment."]]
+];
+
+const WEATHER = [
+ ["clear","晴","Clear"],
+ ["clouded","雲","Clouded"],
+ ["rain","雨","Rain passing"],
+ ["storm","雷","Storm"]
 ];
 
 const READINGS = [
@@ -484,15 +496,56 @@ const SEASONAL = {
   pr:"Today, the season opens: choose what you will deliberately store this quarter, energy, money, an idea, and seal it against leaks."}
 };
 
+
 /* ============ helpers ============ */
 const uid = () => Math.random().toString(36).slice(2,9);
 const pad = n => String(n).padStart(2,"0");
-const todayStr = () => { const d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); };
+const dstr = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const todayStr = () => dstr(new Date());
 const dayOfYear = d => Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
-function currentTerm(date){
-  let found = TERMS[TERMS.length-1];
-  for(const t of TERMS){ if(new Date(date.getFullYear(), t[0]-1, t[1]) <= date) found = t; }
-  return found;
+const DAY = 86400000;
+
+function termInfo(date){
+  let idx = TERMS.length - 1, startYear = date.getFullYear() - 1;
+  for(let k = 0; k < TERMS.length; k++){
+    const t = TERMS[k];
+    if(new Date(date.getFullYear(), t[0]-1, t[1]) <= date){ idx = k; startYear = date.getFullYear(); }
+  }
+  const t = TERMS[idx];
+  const start = new Date(startYear, t[0]-1, t[1]);
+  const nx = TERMS[(idx+1) % TERMS.length];
+  let nextStart = new Date(startYear, nx[0]-1, nx[1]);
+  if(nextStart <= start) nextStart = new Date(startYear+1, nx[0]-1, nx[1]);
+  const total = Math.round((nextStart - start) / DAY);
+  const dayIn = Math.floor((date - start) / DAY) + 1;
+  return {hz:t[2], name:t[3], note:t[4][(dayIn-1) % t[4].length],
+    dayIn:dayIn, total:total, nextHz:nx[2], nextName:nx[3],
+    daysToNext: Math.max(0, Math.ceil((nextStart - date) / DAY))};
+}
+function moonPhase(date){
+  const synodic = 29.530588853;
+  const ref = Date.UTC(2000,0,6,18,14);
+  let age = ((date.getTime() - ref) / DAY) % synodic;
+  if(age < 0) age += synodic;
+  if(age < 1.85) return "new moon";
+  if(age < 5.54) return "waxing crescent";
+  if(age < 9.23) return "first quarter moon";
+  if(age < 12.92) return "waxing moon";
+  if(age < 16.61) return "full moon";
+  if(age < 20.30) return "waning moon";
+  if(age < 23.99) return "last quarter moon";
+  if(age < 27.68) return "waning crescent";
+  return "new moon";
+}
+function seasonStart(date){
+  const y = date.getFullYear();
+  const marks = [[2,4],[5,5],[8,7],[11,7]];
+  let s = new Date(y-1, 10, 7);
+  for(const [m,d] of marks){
+    const md = new Date(y, m-1, d);
+    if(md <= date) s = md;
+  }
+  return s;
 }
 function h(tag, props, ...kids){
   const e = document.createElement(tag);
@@ -509,24 +562,49 @@ function h(tag, props, ...kids){
   }
   return e;
 }
+function stampFor(r){
+  if(r.hz){
+    for(const ch of r.hz){ if(/[\u4e00-\u9fff]/.test(ch)) return ch; }
+  }
+  if(/Sun Bu'er/.test(r.src)) return "孫";
+  if(/Cao Wenyi/.test(r.src)) return "曹";
+  if(/Therīgāthā/.test(r.src)) return "尼";
+  if(/Li Qingzhao/.test(r.src)) return "李";
+  if(/Yu Xuanji/.test(r.src)) return "魚";
+  return "讀";
+}
+function findReading(t){
+  for(const r of READINGS) if(r.t === t) return r;
+  for(const k of Object.keys(SEASONAL)) if(SEASONAL[k].t === t) return SEASONAL[k];
+  return null;
+}
 
 /* ============ state ============ */
-const DEFAULTS = () => ({
-  intentions: { date: todayStr(), items: [{text:"",done:false},{text:"",done:false},{text:"",done:false}] },
-  ideas: [], writing: [], journal: [], writingLog: []
-});
+const DEFAULTS = () => ({ reflections: [], weather: {}, kept: [], legacy: null });
 let S = DEFAULTS();
-let tab = "today";
-let ideaFilter = "all", ideaOpen = null, pieceOpen = null;
+let tab = "reading";
+let unfolded = false, keptOpen = null, sitStep = 0, sitRelease = "", sitCarry = "";
 let storageOK = true;
 
 function load(){
   try{
     const raw = localStorage.getItem(KEY);
-    if(raw) S = Object.assign(DEFAULTS(), JSON.parse(raw));
+    if(raw){ S = Object.assign(DEFAULTS(), JSON.parse(raw)); }
+    else {
+      const old = localStorage.getItem(OLDKEY);
+      if(old){
+        const O = JSON.parse(old);
+        S = DEFAULTS();
+        S.legacy = O;
+        if(Array.isArray(O.journal)){
+          S.reflections = O.journal.map(j => ({id:j.id || uid(), date:j.date,
+            term:"", readingT:"", readingSrc:"", text:j.text, kind:"entry"}));
+        }
+        localStorage.setItem(KEY, JSON.stringify(S));
+      }
+    }
     localStorage.setItem("__sw_test","1"); localStorage.removeItem("__sw_test");
   }catch(e){ storageOK = false; }
-  if(S.intentions.date !== todayStr()) S.intentions = DEFAULTS().intentions;
   document.getElementById("banner").classList.toggle("show", !storageOK);
 }
 let saveTimer = null;
@@ -554,21 +632,7 @@ function setSaveState(txt, err){
 window.addEventListener("pagehide", flush);
 document.addEventListener("visibilitychange", () => { if(document.visibilityState === "hidden") flush(); });
 
-/* ============ derived ============ */
-function streak(){
-  const set = new Set(S.writingLog);
-  let count = 0; const d = new Date();
-  if(!set.has(todayStr())) d.setDate(d.getDate()-1);
-  for(;;){
-    const s = d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
-    if(set.has(s)){ count++; d.setDate(d.getDate()-1); } else break;
-  }
-  return count;
-}
-
-/* ============ views ============ */
-function label(t){ return h("div",{className:"label"}, t); }
-
+/* ============ reading pick (unchanged logic) ============ */
 function pickReading(date){
   const m = date.getMonth()+1, d = date.getDate();
   if(m===12 && d===22){
@@ -584,210 +648,261 @@ function pickReading(date){
   if(r.id === "fu" && m === 12 && (d === 21 || d === 23)) r = READINGS[(i+7) % READINGS.length];
   return {r: r};
 }
-function readingCard(showReflect){
+
+/* ============ shared bits ============ */
+function label(t){ return h("div",{className:"label"}, t); }
+function weatherGlyph(dateStr){
+  const code = S.weather[dateStr];
+  if(!code) return null;
+  const w = WEATHER.filter(x => x[0]===code)[0];
+  return w ? w[1] : null;
+}
+function reflMeta(rf){
+  const bits = [rf.date];
+  if(rf.term) bits.push(rf.term);
+  const g = weatherGlyph(rf.date);
+  if(g) bits.push(g);
+  return bits.join(" · ");
+}
+
+/* ============ 讀 READING ============ */
+function seasonHeader(){
+  const now = new Date();
+  const ti = termInfo(now);
+  const dateLine = now.toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric"});
+  const pct = Math.round(100 * ti.dayIn / ti.total);
+  return h("div",{className:"card term"},
+    h("div",{className:"hz"}, ti.hz),
+    h("div",{style:{flex:1}},
+      label(dateLine),
+      h("div",{className:"name"}, ti.name + ", day " + ti.dayIn + " of " + ti.total),
+      h("div",{className:"prog"}, h("div",{className:"fill",style:{width:pct+"%"}})),
+      h("div",{className:"tiny faint mt8"}, moonPhase(now) + " · " + ti.nextHz + " " + ti.nextName + " in " + ti.daysToNext + (ti.daysToNext===1?" day":" days")),
+      h("div",{className:"faint italic small mt8",style:{fontSize:"14px"}}, ti.note)));
+}
+function keepReading(r){
+  if(S.kept.some(k => k.t === r.t)) return;
+  S.kept.unshift({id:uid(), t:r.t, src:r.src, date:todayStr(), note:""});
+  save(); render();
+}
+function readingBlock(){
   const now = new Date();
   const pick = pickReading(now);
   const r = pick.r;
-  const tomorrow = pickReading(new Date(now.getTime() + 86400000)).r;
+  const isKept = S.kept.some(k => k.t === r.t);
+  const firstSentence = r.tr.split(". ")[0] + ".";
+  if(!unfolded){
+    return h("div",{className:"card accent"},
+      label("Today's reading · " + r.src),
+      pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
+        "Winter Solstice, the day you were born. The year turns where you began; 復, the return of light, is yours.") : null,
+      r.hz ? h("div",{className:"hanzi"}, r.hz) : null,
+      h("div",{style:{fontSize:"15px",lineHeight:"1.55"}}, firstSentence),
+      h("div",{className:"row mt10"},
+        h("button",{className:"btn seal",onclick:() => { unfolded = true; render(); }},"Unfold the reading")));
+  }
   return h("div",{className:"card accent"},
     label("Today's reading · " + r.src),
-    pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",
-      fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
+    pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
       "Winter Solstice, the day you were born. The year turns where you began; 復, the return of light, is yours.") : null,
-    r.hz ? h("div",{style:{fontFamily:"'Songti TC','Songti SC','Kaiti SC',serif",fontSize:"19px",
-      lineHeight:"1.65",marginBottom:"10px"}}, r.hz) : null,
+    r.hz ? h("div",{className:"hanzi"}, r.hz) : null,
     h("div",{style:{fontSize:"15px",lineHeight:"1.55",marginBottom:"10px"}}, r.tr),
-    r.c.map(p => h("div",{className:"faint",style:{fontSize:"14px",lineHeight:"1.55",
-      marginBottom:"10px"}}, p)),
+    r.c.map(p => h("div",{className:"faint",style:{fontSize:"14px",lineHeight:"1.55",marginBottom:"10px"}}, p)),
     h("div",{style:{borderTop:"1px solid var(--line)",margin:"12px 0",height:"1px"}}),
     h("div",{style:{fontSize:"14px",lineHeight:"1.5"}},
-      h("span",{style:{fontFamily:"'Marcellus',serif",fontSize:"11px",letterSpacing:".15em",
-        textTransform:"uppercase",color:"var(--seal)"}},"Practice · "), r.pr),
-    showReflect ? h("div",{className:"row mt10"},
-      h("button",{className:"btn seal",onclick:() => {
-        tab = "practice"; render(); window.scrollTo(0,0);
+      h("span",{style:{fontFamily:"'Marcellus',serif",fontSize:"11px",letterSpacing:".15em",textTransform:"uppercase",color:"var(--seal)"}},"Practice · "), r.pr),
+    h("div",{className:"row mt10 wrap"},
+      isKept
+        ? h("button",{className:"btn ghost",style:{color:"var(--celadon)",borderColor:"var(--celadon)"}},"✓ kept")
+        : h("button",{className:"btn seal",onclick:() => keepReading(r)},"Keep this reading"),
+      h("button",{className:"btn ghost",onclick:() => {
+        tab = "reflect"; render(); window.scrollTo(0,0);
         setTimeout(() => { const el = document.getElementById("reflectTa"); if(el) el.focus(); }, 60);
-      }},"Reflect on this")) : null,
-    h("div",{className:"tiny faint mt10"},
-      "Tomorrow: " + tomorrow.t + " · Library of " + READINGS.length + " readings"));
+      }},"Reflect on this"),
+      h("button",{className:"btn ghost",onclick:() => { unfolded = false; render(); }},"Fold")));
+}
+function keptShelf(){
+  const items = S.kept.length ? S.kept.map(k => {
+    const head = h("div",{className:"row",style:{cursor:"pointer",gap:"10px"},
+      onclick:() => { keptOpen = keptOpen===k.id ? null : k.id; render(); }},
+      h("span",{className:"stamp"}, stampFor(findReading(k.t) || {src:k.src})),
+      h("div",{style:{flex:1}},
+        h("div",{style:{fontSize:"15px"}}, k.t),
+        h("div",{className:"tiny faint"}, k.src + " · kept " + k.date)));
+    let detail = null;
+    if(keptOpen === k.id){
+      const full = findReading(k.t);
+      const noteInp = h("input",{type:"text",value:k.note || "",
+        placeholder:"Why you kept it, one line",
+        oninput:e => { k.note = e.target.value; save(); }});
+      detail = h("div",{className:"detail"},
+        full ? h("div",{className:"faint",style:{fontSize:"14px",lineHeight:"1.55",marginBottom:"10px"}}, full.tr) : null,
+        noteInp,
+        h("div",{className:"row mt8"},
+          h("button",{className:"btn danger",onclick:() => {
+            S.kept = S.kept.filter(x => x.id !== k.id); keptOpen = null; save(); render();
+          }},"Remove from shelf")));
+    }
+    return h("div",{className:"kept-item"}, head, detail);
+  }) : [h("div",{className:"empty",style:{padding:"18px 0"}},"Nothing kept yet. When a reading stays with you, keep it here.")];
+  return h("div",{className:"card"},
+    label("Readings you kept · " + S.kept.length), items);
+}
+function viewReading(){
+  return [seasonHeader(), readingBlock(), keptShelf()];
 }
 
-function viewToday(){
-  const now = new Date();
-  const t = currentTerm(now);
-  const dateLine = now.toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric"});
-  const placeholders = ["The one thing that matters","A steady second","A small kindness to future you"];
+/* ============ 記 REFLECTIONS ============ */
+function viewReflect(){
+  const today = todayStr();
+  const ti = termInfo(new Date());
+  const pick = pickReading(new Date());
 
-  const intentions = S.intentions.items.map((it,i) => {
-    const inp = h("input",{type:"text",placeholder:placeholders[i],value:it.text,
-      oninput:e => { it.text = e.target.value; save(); }});
-    if(it.done) inp.classList.add("done-text");
-    const tick = h("button",{className:"tick"+(it.done?" done":""),
-      onclick:() => { it.done = !it.done; save(); render(); }}, it.done?"✓":"");
-    return h("div",{className:"intention"}, tick, inp);
-  });
+  const wChips = WEATHER.map(([code,cz,name]) =>
+    h("button",{className:"chip"+(S.weather[today]===code?" on":""),
+      onclick:() => {
+        if(S.weather[today]===code) delete S.weather[today];
+        else S.weather[today] = code;
+        save(); render();
+      }},
+      h("span",{className:"cz"}, cz), name));
 
-  const cap = h("input",{type:"text",placeholder:"A passing thought, before it passes"});
-  const keep = () => {
-    if(!cap.value.trim()) return;
-    S.ideas.unshift({id:uid(), text:cap.value.trim(), tag:"life", created:todayStr()});
-    cap.value = ""; save();
+  const ta = h("textarea",{rows:4,id:"reflectTa",
+    placeholder:"What settled today? What is still stirring?"});
+  const keepEntry = () => {
+    if(!ta.value.trim()) return;
+    S.reflections.unshift({id:uid(), date:today, term:ti.hz + " " + ti.name,
+      readingT:pick.r.t, readingSrc:pick.r.src, text:ta.value.trim(), kind:"entry"});
+    ta.value = ""; save(); render();
   };
-  cap.addEventListener("keydown", e => { if(e.key === "Enter") keep(); });
+  const fragInp = h("input",{type:"text",placeholder:"A loose line, before it passes"});
+  const keepFrag = () => {
+    if(!fragInp.value.trim()) return;
+    S.reflections.unshift({id:uid(), date:today, term:ti.hz + " " + ti.name,
+      readingT:"", readingSrc:"", text:fragInp.value.trim(), kind:"fragment"});
+    fragInp.value = ""; save(); render();
+  };
+  fragInp.addEventListener("keydown", e => { if(e.key === "Enter") keepFrag(); });
+
+  const list = S.reflections.length ? S.reflections.map(rf =>
+    h("div",{className:"card refl"},
+      h("div",{className:"row",style:{justifyContent:"space-between"}},
+        h("span",{className:"tiny",style:{fontFamily:"'Marcellus',serif",color:"var(--seal)",letterSpacing:".08em"}},
+          (rf.kind==="sit" ? "THE WEEKLY SIT · " : rf.kind==="fragment" ? "FRAGMENT · " : "") + reflMeta(rf)),
+        h("button",{style:{background:"none",border:"none",color:"var(--faint)",fontSize:"11px"},
+          onclick:() => { S.reflections = S.reflections.filter(x => x.id !== rf.id); save(); render(); }},"remove")),
+      h("div",{className:"mt8"+(rf.kind==="fragment"?" frag":""),
+        style:{whiteSpace:"pre-wrap",fontSize:"14px",lineHeight:"1.55"}}, rf.text),
+      rf.readingT ? h("div",{className:"tiny faint mt8"},"after reading: " + rf.readingT) : null))
+    : [h("div",{className:"empty"},"Nothing here yet. The first line is allowed to be small.")];
+
+  return [
+    h("div",{className:"card"},
+      label("Inner weather today"),
+      h("div",{className:"row wrap"}, wChips)),
+    h("div",{className:"card"},
+      label("Reflection"),
+      ta,
+      h("div",{className:"row mt8"},
+        h("button",{className:"btn",onclick:keepEntry},"Keep this")),
+      h("div",{style:{borderTop:"1px solid var(--line)",margin:"14px 0 12px",height:"1px"}}),
+      label("Or only a fragment"),
+      h("div",{className:"row"}, fragInp,
+        h("button",{className:"btn ghost",onclick:keepFrag},"Keep"))),
+    list
+  ];
+}
+
+/* ============ 季 SEASON ============ */
+function viewSeason(){
+  const now = new Date();
+  const ti = termInfo(now);
+  const sStart = seasonStart(now);
+  const weekAgo = new Date(now.getTime() - 6*DAY);
+  const inSeason = d => new Date(d + "T00:00:00") >= sStart;
+  const inWeek = d => new Date(d + "T00:00:00") >= new Date(dstr(weekAgo) + "T00:00:00");
+
+  const seasonRefl = S.reflections.filter(r => inSeason(r.date));
+  const seasonKept = S.kept.filter(k => inSeason(k.date));
+  const seasonSits = seasonRefl.filter(r => r.kind === "sit");
+  const weekRefl = S.reflections.filter(r => inWeek(r.date));
+
+  const strip = [];
+  for(let i = 13; i >= 0; i--){
+    const g = weatherGlyph(dstr(new Date(now.getTime() - i*DAY)));
+    strip.push(g || "·");
+  }
+
+  const latest = S.reflections.filter(r => r.kind !== "fragment")[0];
+
+  const lastSit = S.reflections.filter(r => r.kind === "sit")[0];
+  const satThisWeek = lastSit && inWeek(lastSit.date);
+
+  let sitCard;
+  if(sitStep === 0){
+    sitCard = h("div",{className:"card accent"},
+      label("The weekly sit"),
+      satThisWeek
+        ? h("div",{style:{fontSize:"14px",lineHeight:"1.55"}},"You sat on " + lastSit.date + ". The week is gathered. Come back after a few more days have accumulated.")
+        : h("div",{style:{fontSize:"14px",lineHeight:"1.55"}},"Ten minutes, once a week: reread what you wrote, name one thing to release and one to carry, and close the week."),
+      satThisWeek ? null : h("div",{className:"row mt10"},
+        h("button",{className:"btn seal",onclick:() => { sitStep = 1; render(); window.scrollTo(0,0); }},"Begin the sit")));
+  } else if(sitStep === 1){
+    sitCard = h("div",{className:"card accent"},
+      label("The sit · 1 of 3 · reread"),
+      weekRefl.length
+        ? weekRefl.map(r => h("div",{style:{fontSize:"13px",lineHeight:"1.5",marginBottom:"10px",fontStyle:r.kind==="fragment"?"italic":"normal",color:r.kind==="fragment"?"var(--faint)":"var(--ink)"}},
+            h("span",{style:{color:"var(--seal)",fontFamily:"'Marcellus',serif",fontSize:"11px"}}, r.date + " · "), r.text))
+        : h("div",{className:"empty",style:{padding:"12px 0"}},"A quiet week on paper. That is also information."),
+      h("div",{className:"row mt10"},
+        h("button",{className:"btn",onclick:() => { sitStep = 2; render(); window.scrollTo(0,0); }},"Continue"),
+        h("button",{className:"btn ghost",onclick:() => { sitStep = 0; render(); }},"Not now")));
+  } else if(sitStep === 2){
+    const relTa = h("textarea",{rows:2,value:sitRelease,placeholder:"One thing to set down",
+      oninput:e => { sitRelease = e.target.value; }});
+    sitCard = h("div",{className:"card accent"},
+      label("The sit · 2 of 3 · release"),
+      h("div",{style:{fontSize:"14px",lineHeight:"1.5",marginBottom:"10px"}},"From this week, name one thing you are ready to set down: a worry, a task, a version of events."),
+      relTa,
+      h("div",{className:"row mt10"},
+        h("button",{className:"btn",onclick:() => { sitStep = 3; render(); window.scrollTo(0,0); }},"Continue")));
+  } else {
+    const carTa = h("textarea",{rows:2,value:sitCarry,placeholder:"One thing to carry forward",
+      oninput:e => { sitCarry = e.target.value; }});
+    sitCard = h("div",{className:"card accent"},
+      label("The sit · 3 of 3 · carry"),
+      h("div",{style:{fontSize:"14px",lineHeight:"1.5",marginBottom:"10px"}},"And one thing worth carrying into the coming week: an insight, a line, a way of moving."),
+      carTa,
+      h("div",{className:"row mt10"},
+        h("button",{className:"btn seal",onclick:() => {
+          const txt = "Released: " + (sitRelease.trim() || "(nothing named)") + "\nCarried: " + (sitCarry.trim() || "(nothing named)");
+          const t2 = termInfo(new Date());
+          S.reflections.unshift({id:uid(), date:todayStr(), term:t2.hz + " " + t2.name,
+            readingT:"", readingSrc:"", text:txt, kind:"sit"});
+          sitStep = 0; sitRelease = ""; sitCarry = "";
+          save(); render(); window.scrollTo(0,0);
+        }},"Close the week")));
+  }
 
   return [
     h("div",{className:"card term"},
-      h("div",{className:"hz"}, t[2]),
-      h("div",{}, label(dateLine),
-        h("div",{className:"name"}, t[3]),
-        h("div",{className:"faint italic small mt8",style:{fontSize:"14px"}}, t[4]))),
-    h("div",{className:"card"}, label("Three intentions"), intentions),
-    h("div",{className:"card"}, label("Quick capture"),
-      h("div",{className:"row"}, cap, h("button",{className:"btn",onclick:keep},"Keep")),
-      h("div",{className:"tiny faint mt8"},"Lands in Ideas, tagged life. Sort it later.")),
-    readingCard(true)
-  ];
-}
-
-function viewIdeas(){
-  let newTag = "writing";
-  const ta = h("textarea",{rows:2,placeholder:"Write it rough. Rough is enough."});
-  const tagChips = TAGS.map(t => h("button",{className:"chip"+(t===newTag?" on":""),
-    onclick:e => { newTag = t;
-      e.target.parentElement.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
-      e.target.classList.add("on"); }}, t));
-  const add = () => {
-    if(!ta.value.trim()) return;
-    S.ideas.unshift({id:uid(), text:ta.value.trim(), tag:newTag, created:todayStr()});
-    ta.value = ""; save(); render();
-  };
-  const filterChips = ["all",...TAGS].map(t => h("button",
-    {className:"chip"+(t===ideaFilter?" on cel":""),
-     onclick:() => { ideaFilter = t; render(); }}, t));
-
-  const shown = S.ideas.filter(x => ideaFilter==="all" || x.tag===ideaFilter);
-  const cards = shown.length ? shown.map(idea => {
-    const head = h("div",{style:{cursor:"pointer"},
-      onclick:() => { ideaOpen = ideaOpen===idea.id ? null : idea.id; render(); }},
-      h("div",{className:"row",style:{justifyContent:"space-between",alignItems:"flex-start"}},
-        h("span",{style:{lineHeight:"1.4"}}, idea.text),
-        h("span",{className:"tiny",style:{color:"var(--seal)",fontFamily:"'Marcellus',serif",flexShrink:0}}, idea.tag)),
-      h("div",{className:"tiny faint mt8",style:{marginTop:"4px"}}, idea.created));
-    let detail = null;
-    if(ideaOpen === idea.id){
-      const edit = h("textarea",{rows:3,value:idea.text,
-        oninput:e => { idea.text = e.target.value; save(); }});
-      const chips = TAGS.map(t => h("button",{className:"chip"+(idea.tag===t?" on":""),
-        style:{fontSize:"11px",padding:"4px 10px"},
-        onclick:() => { idea.tag = t; save(); render(); }}, t));
-      detail = h("div",{className:"detail"}, edit,
-        h("div",{className:"row wrap mt8"}, chips),
-        h("div",{className:"row mt10"},
-          h("button",{className:"btn",style:{flex:1},onclick:() => {
-            S.writing.unshift({id:uid(), title:idea.text.slice(0,60), type:"essay",
-              status:"seed", note:idea.text, updated:todayStr()});
-            S.ideas = S.ideas.filter(x => x.id !== idea.id);
-            ideaOpen = null; save(); tab = "writing"; render();
-          }},"Send to Writing"),
-          h("button",{className:"btn danger",onclick:() => {
-            S.ideas = S.ideas.filter(x => x.id !== idea.id); save(); render();
-          }},"Delete")));
-    }
-    return h("div",{className:"card",style:{padding:"12px"}}, head, detail);
-  }) : [h("div",{className:"empty"},"Nothing here yet. An empty inbox is a clear mind.")];
-
-  return [
-    h("div",{className:"card"}, label("New idea"), ta,
-      h("div",{className:"row wrap mt8"}, tagChips,
-        h("button",{className:"btn seal",style:{marginLeft:"auto"},onclick:add},"Keep"))),
-    h("div",{className:"row wrap mb12"}, filterChips),
-    cards
-  ];
-}
-
-function viewWriting(){
-  let newType = "essay";
-  const st = streak(), wrote = S.writingLog.includes(todayStr());
-  const title = h("input",{type:"text",placeholder:"Working title, however plain"});
-  const typeChips = ["essay","fiction"].map(t => h("button",
-    {className:"chip"+(t===newType?" on":""),
-     onclick:e => { newType = t;
-       e.target.parentElement.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
-       e.target.classList.add("on"); }}, t));
-  const add = () => {
-    if(!title.value.trim()) return;
-    S.writing.unshift({id:uid(), title:title.value.trim(), type:newType,
-      status:"seed", note:"", updated:todayStr()});
-    title.value = ""; save(); render();
-  };
-  title.addEventListener("keydown", e => { if(e.key === "Enter") add(); });
-
-  const cards = S.writing.length ? S.writing.map(p => {
-    const statusBtn = h("button",{className:"status",
-      style:{background:STATUS_COLOR[p.status]},
-      onclick:() => { p.status = STATUSES[(STATUSES.indexOf(p.status)+1)%STATUSES.length];
-        p.updated = todayStr(); save(); render(); }}, p.status);
-    const head = h("div",{className:"row"},
-      statusBtn,
-      h("div",{style:{flex:1,cursor:"pointer"},
-        onclick:() => { pieceOpen = pieceOpen===p.id ? null : p.id; render(); }},
-        h("div",{}, p.title),
-        h("div",{className:"tiny faint"}, p.type + " · touched " + p.updated)));
-    let detail = null;
-    if(pieceOpen === p.id){
-      const ti = h("input",{type:"text",value:p.title,
-        oninput:e => { p.title = e.target.value; p.updated = todayStr(); save(); }});
-      const no = h("textarea",{rows:4,value:p.note,
-        placeholder:"Angle, fragments, the sentence you're circling…",
-        oninput:e => { p.note = e.target.value; p.updated = todayStr(); save(); }});
-      detail = h("div",{className:"detail"}, ti, h("div",{className:"mt8"}, no),
-        h("div",{className:"row mt8"},
-          h("button",{className:"btn ghost",style:{flex:1},onclick:() => {
-            p.type = p.type==="essay" ? "fiction" : "essay"; save(); render();
-          }},"Switch to " + (p.type==="essay"?"fiction":"essay")),
-          h("button",{className:"btn danger",onclick:() => {
-            S.writing = S.writing.filter(x => x.id !== p.id); save(); render();
-          }},"Delete")));
-    }
-    return h("div",{className:"card",style:{padding:"12px"}}, head, detail);
-  }) : [h("div",{className:"empty"},"No pieces yet. Send an idea over, or plant one here.")];
-
-  return [
-    h("div",{className:"card row",style:{gap:"14px"}},
-      h("div",{className:"streakNum",style:{color: st>0 ? "var(--seal)" : "var(--faint)"}}, String(st)),
+      h("div",{className:"hz"},"季"),
       h("div",{style:{flex:1}},
-        h("div",{style:{fontFamily:"'Marcellus',serif",fontSize:"13px"}},"day writing streak"),
-        h("div",{className:"tiny faint"},"Any words count. Consistency over volume.")),
-      wrote
-        ? h("button",{className:"btn ghost",style:{color:"var(--celadon)",borderColor:"var(--celadon)"},disabled:""},"✓ wrote")
-        : h("button",{className:"btn seal",onclick:() => { S.writingLog.push(todayStr()); save(); render(); }},"I wrote today")),
-    h("div",{className:"card"}, label("New piece"), title,
-      h("div",{className:"row mt8"}, typeChips,
-        h("button",{className:"btn seal",style:{marginLeft:"auto"},onclick:add},"Plant"))),
-    cards
-  ];
-}
-
-function viewPractice(){
-  const ta = h("textarea",{rows:4,id:"reflectTa",placeholder:"What settled today? What is still stirring?"});
-  const keep = () => {
-    if(!ta.value.trim()) return;
-    S.journal.unshift({id:uid(), date:todayStr(), text:ta.value.trim()});
-    ta.value = ""; save(); render();
-  };
-  const entries = S.journal.map(j =>
-    h("div",{className:"card",style:{padding:"12px"}},
-      h("div",{className:"row",style:{justifyContent:"space-between"}},
-        h("span",{className:"small",style:{fontFamily:"'Marcellus',serif",color:"var(--seal)",fontSize:"12px"}}, j.date),
-        h("button",{style:{background:"none",border:"none",color:"var(--faint)",fontSize:"11px"},
-          onclick:() => { S.journal = S.journal.filter(x => x.id !== j.id); save(); render(); }},"remove")),
-      h("div",{className:"mt8",style:{whiteSpace:"pre-wrap",fontSize:"14px",lineHeight:"1.55"}}, j.text)));
-
-  return [
-    readingCard(),
-    h("div",{className:"card"}, label("Reflection"), ta,
-      h("div",{className:"mt8"}, h("button",{className:"btn",onclick:keep},"Keep this"))),
-    entries
+        label("The season, gathered"),
+        h("div",{className:"name"}, ti.name),
+        h("div",{className:"tiny faint mt8"},
+          "since " + dstr(sStart) + ": " + seasonRefl.length + " reflections · " +
+          seasonKept.length + " readings kept · " + seasonSits.length + (seasonSits.length===1?" sit":" sits")))),
+    h("div",{className:"card"},
+      label("Inner weather, last 14 days"),
+      h("div",{className:"wstrip"}, strip.join(""))),
+    latest ? h("div",{className:"card"},
+      label("From your reflections"),
+      h("div",{className:"italic",style:{fontSize:"14px",lineHeight:"1.55"}},
+        latest.text.length > 220 ? latest.text.slice(0,220) + "…" : latest.text),
+      h("div",{className:"tiny mt8",style:{color:"var(--seal)",fontFamily:"'Marcellus',serif"}},
+        latest.date + (latest.readingT ? " · after reading: " + latest.readingT : ""))) : null,
+    sitCard
   ];
 }
 
@@ -798,7 +913,6 @@ function openSync(){
   const exportStr = JSON.stringify(S, null, 2);
   const msg = h("div",{className:"msg"});
   const say = t => { msg.textContent = t; msg.classList.add("show"); };
-
   const out = h("textarea",{rows:4,readonly:"",className:"mono",value:exportStr,
     style:{background:"var(--card)",color:"var(--faint)"},
     onfocus:e => e.target.select()});
@@ -812,7 +926,6 @@ function openSync(){
       r.onload = () => { inp.value = String(r.result); say("File read. Review, then Load."); };
       r.readAsText(f);
     }});
-
   sheet.append(
     h("div",{className:"row",style:{justifyContent:"space-between",marginBottom:"6px"}},
       h("div",{style:{fontFamily:"'Marcellus',serif",fontSize:"19px"}},"Sync and backup"),
@@ -848,7 +961,6 @@ function openSync(){
           say("That does not look like a Still Water backup."); return; }
         if(!confirm("This replaces everything currently on this device. Continue?")) return;
         S = Object.assign(DEFAULTS(), parsed);
-        if(S.intentions.date !== todayStr()) S.intentions = DEFAULTS().intentions;
         save(); render(); closeSync();
       }},"Load")));
   document.getElementById("modal").classList.add("show");
@@ -860,7 +972,7 @@ document.getElementById("modal").addEventListener("click", e => {
 document.getElementById("syncBtn").addEventListener("click", openSync);
 
 /* ============ shell ============ */
-const NAV = [["today","今","Today"],["ideas","思","Ideas"],["writing","書","Writing"],["practice","心","Practice"]];
+const NAV = [["reading","讀","Reading"],["reflect","記","Reflections"],["season","季","Season"]];
 function renderNav(){
   const row = document.getElementById("navrow");
   row.replaceChildren(...NAV.map(([id,ch,lbl]) =>
@@ -871,11 +983,10 @@ function renderNav(){
 }
 function render(){
   const view = document.getElementById("view");
-  const content = tab==="today" ? viewToday()
-    : tab==="ideas" ? viewIdeas()
-    : tab==="writing" ? viewWriting()
-    : viewPractice();
-  view.replaceChildren(...content.flat());
+  const content = tab==="reading" ? viewReading()
+    : tab==="reflect" ? viewReflect()
+    : viewSeason();
+  view.replaceChildren(...content.flat().filter(Boolean));
   renderNav();
 }
 load();
