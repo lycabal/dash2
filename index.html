@@ -238,7 +238,7 @@ const READINGS = [
      "This is strategy, not softness for its own sake. The stream-valley outlasts every peak because everything flows to it. Strength that knows how to stay low never has to defend a summit."],
   pr:"In one situation today where you could assert, deliberately gather instead: listen, receive, let the current come to you."},
 
- {src:"Li Qingzhao (李清照), Song dynasty poet", t:"Green thickening, red thinning",
+ {src:"Li Qingzhao (李清照), Song dynasty poet", t:"Green thickening, red thinning", season:"spring",
   hz:"知否？知否？應是綠肥紅瘦。",
   tr:"From her lyric after a night of storm: I ask the maid rolling up the blinds, and she says the crab-apple looks the same as ever. Doesn't she know? Doesn't she know? By now the green must be growing fat, and the red growing thin.",
   c:["Li Qingzhao is the finest female poet in the Chinese language, and this small lyric is really about attention. Two women look at the same tree. One sees no change. The poet, who has been paying attention, knows the storm has turned the season: leaves thickening, blossoms going.",
@@ -317,7 +317,7 @@ const READINGS = [
      "Anyone who has sat across a negotiating table knows this force. The person who does not need to fill the silence usually leaves with the better terms."],
   pr:"In one tense exchange today, be the still one. Let the silence sit two beats longer than comfortable, and watch what it draws out."},
 
- {src:"Zhuangzi, chapter 17 (秋水)", t:"The frog in the well",
+ {src:"Zhuangzi, chapter 17 (秋水)", t:"The frog in the well", season:"autumn",
   hz:"井蛙不可以語於海者，拘於虛也。",
   tr:"You cannot speak of the ocean to a frog in a well; it is bound by its hollow.",
   c:["The autumn floods swell the river until its god believes he is the greatest water alive, and then he reaches the sea. Zhuangzi's compassion is that everyone, including the wise, is some size of frog in some size of well. The error is never having a well; it is forgetting the ocean exists.",
@@ -369,7 +369,7 @@ const READINGS = [
      "Jian is the counter-argument to every overnight story. The things you are building, a practice, a readership, a name, grow at tree speed, and tree speed is why they will hold."],
   pr:"Look at your slowest project and honor it: mark the ring it has grown this season, and take exactly one more stage today."},
 
- {src:"Tao Yuanming (陶淵明), poet of return", t:"Chrysanthemums by the eastern hedge",
+ {src:"Tao Yuanming (陶淵明), poet of return", t:"Chrysanthemums by the eastern hedge", season:"autumn",
   hz:"採菊東籬下，悠然見南山。",
   tr:"Picking chrysanthemums by the eastern hedge, unhurried, I catch sight of the southern mountain.",
   c:["Tao Yuanming resigned his official post rather than bow to a visiting inspector for the sake of his salary, and went home to farm badly and write immortally. This couplet is the whole philosophy of that homecoming: the mountain appears because he was not looking for it. He was picking flowers.",
@@ -449,7 +449,7 @@ const READINGS = [
      "Watch the people others genuinely bring things to, problems, ideas, trust. They are almost never the loudest in the room. They are the ones who made themselves safe and low to pour into."],
   pr:"Be the sea in one relationship today: place yourself below, make it easy to bring you things, and issue no orders."},
 
- {src:"I Ching, hexagram 24 · 復", t:"Return: rest at the turning", id:"fu",
+ {src:"I Ching, hexagram 24 · 復", t:"Return: rest at the turning", season:"winter", id:"fu",
   hz:"雷在地中，復。先王以至日閉關，商旅不行。",
   tr:"Thunder within the earth: return. At the winter solstice the ancient kings closed the passes; merchants and travelers did not move about.",
   c:["Fu is one unbroken line returning beneath five broken ones: the first stir of light at the darkest point of the year. And the prescribed response is remarkable. Close the roads. Stop commerce. Protect the fragile new beginning with rest.",
@@ -496,6 +496,188 @@ const SEASONAL = {
   pr:"Today, the season opens: choose what you will deliberately store this quarter, energy, money, an idea, and seal it against leaks."}
 };
 
+const BATCH1 = [
+ /* ---- spring ---- */
+ {season:"spring", src:"Meng Haoran (孟浩然), Tang poet", t:"Spring dawn",
+  hz:"春眠不覺曉，處處聞啼鳥。",
+  tr:"Spring sleep, unaware of dawn; everywhere, the sound of birds waking.",
+  c:["The most memorized poem in the language is about oversleeping. The poet does not apologize for it. Spring rest is deep because spring growth is deep, and the birds carry on the morning without supervision. Some seasons ask you to trust that things proceed while you sleep."],
+  pr:"Let one thing proceed today without your supervision, and notice that it does."},
+ {season:"spring", src:"Bai Juyi (白居易), Tang poet", t:"The grass returns",
+  hz:"野火燒不盡，春風吹又生。",
+  tr:"Wildfire cannot burn it out; when the spring wind blows, it grows again.",
+  c:["Bai Juyi wrote this about grass at sixteen years old, and it became the classic Chinese image of resilience: not the oak that withstands, but the grass that concedes the fire entirely and returns anyway. Its survival strategy is roots, not resistance. What burned in your last year matters less than what your roots are doing now."],
+  pr:"Name one thing in your life that burned and is quietly regrowing. Water it today."},
+ {season:"spring", src:"I Ching, hexagram 4 · 蒙", t:"The spring beneath the mountain",
+  hz:"山下出泉，蒙；君子以果行育德。",
+  tr:"A spring rises at the foot of the mountain: youthful inexperience. The wise nourish character through decisive action.",
+  c:["Meng is the hexagram of the beginner, and its image is generous: the new spring does not know its course yet, and that is proper. Water finds its way by flowing, not by planning the river in advance. The counsel is decisive small action, because a spring becomes a stream only by moving."],
+  pr:"In the thing you are newest at, act small and decisively today instead of studying the whole river first."},
+ {season:"spring", src:"Xue Tao (薛濤), Tang poet", t:"Flowers opening, no one to share them",
+  tr:"A rendering from her Spring Gazing songs: The flowers open, and no one to enjoy them with; the flowers fall, and no one to grieve with. If you ask when longing weighs most, it is when the blossoms open and when they fall.",
+  c:["Xue Tao supported herself by her own brush in an age when almost no woman could, and her spring song names something precise: beauty sharpens loneliness, because delight wants a witness. The turning seasons are best held with company. Her poem is quietly an instruction to find your witnesses."],
+  pr:"Share one small seasonal thing today, a bloom, a sky, a taste, with one specific person."},
+
+ /* ---- summer ---- */
+ {season:"summer", src:"Yang Wanli (楊萬里), Song poet", t:"The lotus bud and the dragonfly",
+  hz:"小荷才露尖尖角，早有蜻蜓立上頭。",
+  tr:"The little lotus has only just shown its pointed tip, and already a dragonfly stands upon it.",
+  c:["The bud has barely broken the water and life has already found it, landed on it, made use of it. Yang Wanli's tenderness has a lesson folded inside: nothing needs to be finished to be of value. Your half-formed draft, your barely opened venture, is already a place something can land."],
+  pr:"Show one unfinished thing to one person today, at the pointed-tip stage, on purpose."},
+ {season:"summer", src:"I Ching, hexagram 30 · 離", t:"Light doubled",
+  hz:"明兩作，離；大人以繼明照于四方。",
+  tr:"Brightness rises twice: fire. The great continue the light, illuminating the four directions.",
+  c:["Li is fire doubled, the hexagram of high summer, and its instruction is about continuity: the point is not one blaze but the relay, light kept going, passed along, renewed daily like a hearth. Clinging is fire's other meaning; flame only exists by holding to what it burns. Attach your light to what can sustain it."],
+  pr:"Tend one long-burning commitment today rather than starting a new fire."},
+ {season:"summer", src:"Zhuangzi, chapter 19 (達生) · the cicada catcher", t:"The cicada catcher's stillness",
+  hz:"用志不分，乃凝於神。",
+  tr:"When the will is undivided, it gathers into spirit. The hunchbacked old man caught cicadas from the treetops as easily as picking them off the ground, holding his body like a dry stump, aware of nothing but cicada wings.",
+  c:["Confucius asks the old man his secret and receives the whole philosophy of skill in one line: undivided attention condensing into something that looks like magic. In cicada season, the teaching returns. Everything you do while also doing three other things is done by nobody in particular."],
+  pr:"Choose one task today and give it undivided attention for thirty minutes. Nothing else invited."},
+ {season:"summer", src:"Zhuangzi, chapter 19 (達生) · the swimmer", t:"The swimmer at the falls",
+  tr:"A rendering: A man swims calmly in the churning water beneath a great cataract where fish cannot survive. Asked his method, he says: I have none. I grew up in the water and it became my nature. I go down with the swirls and come up with the eddies. I follow the way of the water instead of imposing my own.",
+  c:["The swimmer's secret is intimacy, not technique. He survived what should have drowned him by knowing the water's habits better than his own fear. Whatever current you are in this season, the practice is his: study how it actually moves, and stop swimming against its nature."],
+  pr:"Identify the current you keep fighting, and today move with one of its swirls instead."},
+
+ /* ---- autumn ---- */
+ {season:"autumn", src:"Wang Wei (王維), Tang poet", t:"Mountain rain, early autumn",
+  hz:"空山新雨後，天氣晚來秋。",
+  tr:"Empty mountain, after fresh rain; the evening air arrives already autumn.",
+  c:["The season announces itself in the air before the calendar admits it. Wang Wei's whole poem is an inventory of small clean perceptions: moonlight through pines, spring water over stones. Autumn is the season of exactly this kind of attention, cool enough to see clearly, quiet enough to hear the water."],
+  pr:"Step outside this evening and find the one detail that says the season is turning."},
+ {season:"autumn", src:"Liu Yuxi (劉禹錫), Tang poet", t:"Autumn better than spring",
+  hz:"自古逢秋悲寂寥，我言秋日勝春朝。",
+  tr:"Since ancient times, autumn has meant sorrow and desolation. I say an autumn day surpasses a spring morning. A single crane climbs above the clouds, and draws my poetry up into the blue.",
+  c:["Liu Yuxi wrote this in political exile, refusing the mandatory sadness of his situation and his season. The reframe is not denial; the crane really is there, climbing. Seasons of loss have their own material, and some work can only be made from the clear cold air of them."],
+  pr:"Take the season of life you are told to mourn, and find its crane: one thing it makes possible."},
+ {season:"autumn", src:"Therīgāthā · Ambapālī's verse", t:"The body's autumn",
+  tr:"A rendering of the nun Ambapālī, once the most celebrated beauty of her city, composed in old age: Black and glossy as bees my hair once was; with age it is like bark cloth. Such was my body. Now it is worn, the home of many pains. The truth-speaker's word does not change.",
+  c:["Ambapālī inventories her famous beauty, feature by feature, against what age has made of it, and her tone is the startling thing: not grief but verification. Everything the teaching said about impermanence, her own body has confirmed. She turned even her vanishing beauty into evidence, which is a kind of victory over it."],
+  pr:"Notice one change time has made in you, and try Ambapālī's tone: verification rather than mourning."},
+
+ /* ---- winter ---- */
+ {season:"winter", src:"Liu Zongyuan (柳宗元), Tang poet", t:"River snow",
+  hz:"千山鳥飛絕，萬徑人蹤滅。孤舟蓑笠翁，獨釣寒江雪。",
+  tr:"A thousand mountains, no bird in flight; ten thousand paths, no human trace. One boat, an old man in straw cloak and hat, fishing alone in the cold river snow.",
+  c:["The most austere landscape in Chinese poetry, written in bitter exile, and at its center a figure who has not stopped his practice. Everything social has been erased by the snow; the fishing continues. Winter asks what you would keep doing with no audience, no traffic, no reply. That thing is yours."],
+  pr:"Do the thing you would still do alone in the snow, today, for its own sake."},
+ {season:"winter", src:"Wang Anshi (王安石), Song poet", t:"Plum blossoms against the cold",
+  hz:"牆角數枝梅，凌寒獨自開。",
+  tr:"At the wall's corner, a few branches of plum, braving the cold, blooming alone.",
+  c:["The plum is the first of the flowers, opening in late winter when nothing else dares, and Chinese tradition made it the emblem of integrity under adversity. Note where it blooms: a wall corner, an unglamorous spot, no one arranged it. The season of your best flowering may not look like anyone's spring."],
+  pr:"Identify what is quietly blooming in you out of season, and give it one hour of open attention."},
+ {season:"winter", src:"Therīgāthā · Soṇā's verse", t:"Soṇā of the ten children",
+  tr:"A rendering of the nun Soṇā, who bore ten children and came to the path in old age: I raised ten children in this body. Then, old and frail, I went to a nun and learned. I dispelled the dark. The last of the fetters fell away. Old age reached me, but it arrived too late.",
+  c:["Soṇā's verse is the tradition's answer to every worry about starting late. She began her deepest work after a whole lifetime of other labor, and the poems remember her precisely for the lateness. The dark does not check your age before it lifts."],
+  pr:"Name the thing you have quietly decided you are too late for, and take its first step today anyway."},
+ {season:"winter", src:"I Ching, hexagram 29 · 坎", t:"Water doubled",
+  hz:"水洊至，習坎；君子以常德行，習教事。",
+  tr:"Water flows on and arrives again: the abyss repeated. The wise walk in constant virtue and practice the work of teaching.",
+  c:["Kan is water doubled, the hexagram of the ravine, danger repeated, deep winter. And water's answer to the ravine is the whole teaching: it does not argue with the depth, it fills every hollow honestly and keeps moving. Constancy is what the image prescribes: in hard stretches, keep the practice daily and ordinary."],
+  pr:"In whatever ravine this month holds, keep one small practice utterly constant, today included."},
+ {season:"winter", src:"Sun Bu'er (孫不二), female Daoist master", t:"What winter stores",
+  tr:"A rendering from her teachings on the seasons of practice: In the cold months, the sap of trees goes down to the root. Cultivation follows the same road. Do not force flowering out of season. Sit more, speak less, keep the essence gathered like a seed in dark soil, and spring will find you full.",
+  c:["The women's alchemy Sun Bu'er taught runs on the year's rhythm: there are seasons for outward work and seasons when everything of value happens underground. Winter practice looks like nothing from outside. That is its design. The fullness of your next spring is being decided by how well you store now."],
+  pr:"Cancel one outward obligation this week and give that hour to storing: rest, reading, or quiet."},
+
+ /* ---- any season ---- */
+ {season:"any", src:"Dao De Jing, chapter 33", t:"Knowing the self",
+  hz:"知人者智，自知者明。勝人者有力，自勝者強。",
+  tr:"Knowing others is intelligence; knowing yourself is clarity. Overcoming others takes force; overcoming yourself is strength.",
+  c:["Laozi builds a small ladder: intelligence, then clarity above it; force, then strength above it. In each pair the higher rung points inward. The professions reward the outward pair lavishly, which is exactly why the inward pair gets neglected by capable people. Clarity about your own patterns outperforms cleverness about everyone else's."],
+  pr:"Catch one of your own patterns in the act today, and simply name it to yourself without judgment."},
+ {season:"any", src:"Dao De Jing, chapter 44", t:"Knowing what is enough",
+  hz:"知足不辱，知止不殆，可以長久。",
+  tr:"Know what is enough and avoid disgrace. Know when to stop and avoid danger. This is how to last long.",
+  c:["The chapter opens with three questions: fame or your self, which is dearer? Your self or wealth, which is worth more? Gain or loss, which harms more? Then this answer. Enough is not a limit on ambition; it is ambition's steering, the difference between building long and burning out publicly."],
+  pr:"Define enough for one running pursuit today, in one written sentence, and notice how it feels to have a line."},
+ {season:"any", src:"Dao De Jing, chapter 63", t:"The difficult while it is easy",
+  hz:"圖難於其易，為大於其細。天下難事，必作於易。",
+  tr:"Plan the difficult while it is still easy; do the great while it is still small. The world's hardest matters always begin as easy ones.",
+  c:["Every crisis on any desk was once an email that could have been answered in two minutes. Laozi's counsel sounds like productivity advice and is actually a theory of time: difficulty is not a property of tasks but of timing. The same matter is easy on Tuesday and a disaster in December."],
+  pr:"Find today's two-minute version of next quarter's problem, and do it now."},
+ {season:"any", src:"Dao De Jing, chapter 81", t:"Giving increases",
+  hz:"既以為人己愈有，既以與人己愈多。",
+  tr:"The sage does not hoard. The more she does for others, the more she has; the more she gives to others, the greater her abundance.",
+  c:["The classic's final chapter ends on an economy that sounds impossible and is verified by every generous career: knowledge shared compounds, credit given returns, help extended builds the network that later holds you. Hoarding feels like accumulation and behaves like leakage. Giving feels like loss and behaves like investment."],
+  pr:"Give away one thing today you were saving for advantage: an introduction, a template, a piece of what you know."},
+ {season:"any", src:"Dao De Jing, chapter 7", t:"Heaven and earth endure",
+  hz:"天長地久。天地所以能長且久者，以其不自生，故能長生。",
+  tr:"Heaven is long, earth endures. They can be long and enduring because they do not live for themselves; therefore they live long.",
+  c:["The sky has never once promoted itself, and it has outlasted every empire that did. Laozi's paradox lands on the self: the person who steps back ends up ahead, who stays outside the scramble is preserved by it. Whatever is built primarily to glorify its builder inherits the builder's lifespan. Build for something beyond yourself and it borrows the sky's."],
+  pr:"For one decision today, ask what serves the work rather than what serves your name, and follow that."},
+ {season:"any", src:"Zhuangzi, chapter 20 (山木) · the empty boat", t:"The empty boat",
+  hz:"人能虛己以遊世，其孰能害之！",
+  tr:"If an empty boat drifts into yours, even a hot-tempered man does not get angry. If someone is in it, he shouts. If a person could make themselves empty and wander the world that way, who could harm them?",
+  c:["The collision is identical; only the presence of a self to blame changes everything. Zhuangzi's image explains most of what wounds us in a day: not the event, but the assumed someone behind it. Half the offenses that reach you were empty boats, wind and current, nobody at the tiller aiming at you."],
+  pr:"When something bumps you today, try the empty-boat reading first: assume current, not intent, and watch the anger have nowhere to land."},
+ {season:"any", src:"Zhuangzi, chapter 6 (大宗師)", t:"Forgetting each other in the rivers and lakes",
+  hz:"相濡以沫，不如相忘於江湖。",
+  tr:"When the spring dries up, the fish are stranded together, wetting each other with their spit and foam. It would be better to forget each other in the wide rivers and lakes.",
+  c:["The stranded fish look like devotion and are actually an emergency. Zhuangzi's severe kindness: some closeness is only shared scarcity, and real love wants the beloved back in deep water even if the deep water separates you. The wish for people you care about is not that they need you, but that they swim."],
+  pr:"Where you are wetting someone with spit and foam, ask today what would put them back in deep water instead."},
+ {season:"any", src:"Chan Buddhism · Zhaozhou", t:"Go drink tea",
+  hz:"吃茶去。",
+  tr:"A monk who had been to the monastery before came to Zhaozhou; the master said, go drink tea. One who had never been came; the master said, go drink tea. The supervisor asked why both received the same answer. Zhaozhou called out: supervisor! Yes? Go drink tea.",
+  c:["Three different people, one instruction, and the joke has kept its edge for a thousand years: the profound thing you are searching for is not behind the ordinary act, it is the ordinary act, fully entered. The tea is not a metaphor. Boil the water. Warm the pot. Be where the tea is."],
+  pr:"Make one cup of tea today as the entire practice: nothing to figure out, only water, leaf, and attention."},
+ {season:"any", src:"Chan Buddhism · Nanquan's answer", t:"Ordinary mind is the Way",
+  hz:"平常心是道。",
+  tr:"Zhaozhou asked Nanquan: what is the Way? Nanquan said: ordinary mind is the Way. Zhaozhou asked: should I direct myself toward it? Nanquan said: to aim at it is to turn away from it.",
+  c:["The answer removes the ladder everyone assumes: no special state, no attainment elsewhere, just this mind, unforced, doing the dishes and reading the file. The sting is the second exchange: even chasing ordinariness makes it exotic. The practice is subtraction of the chase itself."],
+  pr:"For one hour today, drop all self-improvement entirely and just be the person doing the next ordinary thing."},
+ {season:"any", src:"Śūraṅgama Sūtra · Guanyin's method", t:"Turning the hearing inward",
+  hz:"反聞聞自性。",
+  tr:"Asked how she attained realization, Guanyin answers: through the ear. I turned the hearing around, away from sounds, to listen to the very nature that hears.",
+  c:["Of all the methods presented in the sutra, Guanyin's listening is judged the most suited to this world, and it starts with the sense you cannot close. You have listened outward your whole life: clients, family, notifications. Her turn is small and total: notice the quiet awareness that has been doing all the listening. It was never disturbed by any of the sounds."],
+  pr:"Three times today, for three breaths, listen to the listening itself instead of the sounds."},
+ {season:"any", src:"Therīgāthā · Sumangala's mother", t:"Free, so free",
+  tr:"A rendering of the nun known as Sumangala's mother: Free, so wonderfully free am I, from the pestle, from the pot, from my crooked lord and his sunshades. I have ended craving with a splitting sound. Cool am I now, and quenched.",
+  c:["Another of the first nuns counting her liberations item by household item, and again the husband is on the inventory list between the kitchen tools. The poems keep this shape because freedom is not abstract; it is measured against specific weights put down. Cool and quenched: her word for peace is the word for a fire that no longer needs feeding."],
+  pr:"Find the fire in your week that only burns because you keep feeding it, and skip one feeding today."},
+];
+
+const MOON_READINGS = {
+ full: {src:"Zhang Jiuling (張九齡), Tang poet", t:"The moon rises over the sea",
+  hz:"海上生明月，天涯共此時。",
+  tr:"Over the sea, the bright moon is born; to the ends of the sky, we share this moment.",
+  c:["Written to someone far away, the couplet performs the oldest consolation: the same full moon stands over both of you at once, so distance is not what it claims to be. On full moon nights the Chinese calendar remembers everyone at a distance, the living and the gone. Whoever you miss is under this exact light."],
+  pr:"The moon is full tonight. Step out, look at it, and think deliberately of one far person under the same light."},
+ dark: {src:"Sun Bu'er (孫不二), the women's alchemy on lunar timing", t:"The dark of the moon",
+  tr:"A rendering from the tradition of women's cultivation, which times its practice to the moon: When the moon goes dark, the tide of energy withdraws to its source. Do not draw on what is not there. These are the days for rest, warmth, and gathering, as the moon itself gathers for its return.",
+  c:["The nüdan manuals Sun Bu'er's lineage produced are the rare classical texts written around a woman's cycles, and they treat the new moon as a scheduled rest, built into the sky. Nothing has gone wrong on low days. The moon is not failing when it is dark; it is doing the part of the month that makes the brightness possible."],
+  pr:"The moon is new tonight. Take the evening at half speed, on the sky's authority."}
+};
+
+const PENTADS = [
+ [["雁北鄉","geese turn their minds north"],["鵲始巢","magpies begin their nests"],["雉始雊","the pheasant first calls"]],
+ [["雞始乳","hens begin to brood"],["征鳥厲疾","birds of prey fly fierce and swift"],["水澤腹堅","the marshes freeze solid to the core"]],
+ [["東風解凍","the east wind melts the ice"],["蟄蟲始振","hibernating creatures begin to stir"],["魚陟負冰","fish rise beneath the thinning ice"]],
+ [["獺祭魚","the otter lays out its fish"],["候雁北","the wild geese head north"],["草木萌動","plants and trees put forth buds"]],
+ [["桃始華","the peach begins to blossom"],["倉庚鳴","the oriole sings"],["鷹化為鳩","hawks give way to doves"]],
+ [["玄鳥至","the swallows arrive"],["雷乃發聲","thunder raises its voice"],["始電","the first lightning"]],
+ [["桐始華","the paulownia blooms"],["田鼠化為鴽","field mice give way to quails"],["虹始見","the first rainbow appears"]],
+ [["萍始生","duckweed begins to grow"],["鳴鳩拂其羽","the cooing dove preens its feathers"],["戴勝降於桑","the hoopoe alights on the mulberry"]],
+ [["螻蟈鳴","the mole crickets cry"],["蚯蚓出","earthworms come up"],["王瓜生","the royal gourd vine grows"]],
+ [["苦菜秀","the bitter herb flowers"],["靡草死","delicate grasses wither"],["麥秋至","the wheat's own autumn arrives"]],
+ [["螳螂生","the mantis hatches"],["鵙始鳴","the shrike begins to call"],["反舌無聲","the mockingbird falls silent"]],
+ [["鹿角解","deer shed their antlers"],["蜩始鳴","cicadas begin to sing"],["半夏生","the half-summer herb sprouts"]],
+ [["溫風至","the warm winds arrive"],["蟋蟀居壁","crickets move to the walls"],["鷹始鷙","hawks begin to strike"]],
+ [["腐草為螢","rotting grass becomes fireflies"],["土潤溽暑","the earth steams in damp heat"],["大雨時行","great rains pass through"]],
+ [["涼風至","the cool wind arrives"],["白露降","white dew descends"],["寒蟬鳴","the cold cicada sings"]],
+ [["鷹乃祭鳥","the hawk offers up birds"],["天地始肅","heaven and earth turn stern"],["禾乃登","the grain is brought in"]],
+ [["鴻雁來","the wild geese come south"],["玄鳥歸","the swallows return home"],["群鳥養羞","flocks store up provisions"]],
+ [["雷始收聲","thunder withdraws its voice"],["蟄蟲坯戶","burrowing creatures seal their doors"],["水始涸","the waters begin to dry"]],
+ [["鴻雁來賓","the last geese arrive as guests"],["雀入大水為蛤","sparrows give way to shellfish"],["菊有黃華","the chrysanthemums bloom yellow"]],
+ [["豺乃祭獸","the wolf lays out its prey"],["草木黃落","leaves turn yellow and fall"],["蟄蟲咸俯","creatures settle into their burrows"]],
+ [["水始冰","the water begins to freeze"],["地始凍","the ground begins to harden"],["雉入大水為蜃","pheasants give way to sea clams"]],
+ [["虹藏不見","rainbows hide away"],["天氣上升地氣下降","heaven's breath rises, earth's descends"],["閉塞而成冬","all closes up, and winter is made"]],
+ [["鶡鴠不鳴","the mountain bird stops singing"],["虎始交","tigers begin their courtship"],["荔挺出","the winter iris pushes up"]],
+ [["蚯蚓結","earthworms knot together"],["麋角解","the elk sheds its antlers"],["水泉動","the springs begin to move"]]
+];
+
+READINGS.push(...BATCH1);
+
 
 /* ============ helpers ============ */
 const uid = () => Math.random().toString(36).slice(2,9);
@@ -518,7 +700,7 @@ function termInfo(date){
   if(nextStart <= start) nextStart = new Date(startYear+1, nx[0]-1, nx[1]);
   const total = Math.round((nextStart - start) / DAY);
   const dayIn = Math.floor((date - start) / DAY) + 1;
-  return {hz:t[2], name:t[3], note:t[4][(dayIn-1) % t[4].length],
+  return {hz:t[2], name:t[3], note:t[4][(dayIn-1) % t[4].length], idx:idx,
     dayIn:dayIn, total:total, nextHz:nx[2], nextName:nx[3],
     daysToNext: Math.max(0, Math.ceil((nextStart - date) / DAY))};
 }
@@ -576,6 +758,7 @@ function stampFor(r){
 function findReading(t){
   for(const r of READINGS) if(r.t === t) return r;
   for(const k of Object.keys(SEASONAL)) if(SEASONAL[k].t === t) return SEASONAL[k];
+  for(const k of Object.keys(MOON_READINGS)) if(MOON_READINGS[k].t === t) return MOON_READINGS[k];
   return null;
 }
 
@@ -632,21 +815,75 @@ function setSaveState(txt, err){
 window.addEventListener("pagehide", flush);
 document.addEventListener("visibilitychange", () => { if(document.visibilityState === "hidden") flush(); });
 
-/* ============ reading pick (unchanged logic) ============ */
-function pickReading(date){
+/* ============ day pillar (sexagenary) ============
+   Anchor verified against two independent published charts:
+   1998-07-31 = 己卯 (#15) and 2025-05-07 = 丙子 (#12). */
+const STEMS = [["甲","yang wood"],["乙","yin wood"],["丙","yang fire"],["丁","yin fire"],["戊","yang earth"],["己","yin earth"],["庚","yang metal"],["辛","yin metal"],["壬","yang water"],["癸","yin water"]];
+const BRANCHES = [["子","rat"],["丑","ox"],["寅","tiger"],["卯","rabbit"],["辰","dragon"],["巳","snake"],["午","horse"],["未","goat"],["申","monkey"],["酉","rooster"],["戌","dog"],["亥","pig"]];
+function dayPillar(date){
+  const anchor = Date.UTC(2025, 4, 7); /* 丙子 = #12 */
+  const days = Math.round((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - anchor) / DAY);
+  return (((12 + days) % 60) + 60) % 60;
+}
+function pillarHz(n){ return STEMS[n % 10][0] + BRANCHES[n % 12][0]; }
+function pillarEn(n){ return STEMS[n % 10][1] + " " + BRANCHES[n % 12][1]; }
+
+function moonAge(date){
+  const synodic = 29.530588853;
+  const ref = Date.UTC(2000,0,6,18,14);
+  let age = ((date.getTime() - ref) / DAY) % synodic;
+  if(age < 0) age += synodic;
+  return age;
+}
+function isFullMoon(date){ return Math.abs(moonAge(date) - 14.765) <= 0.5; }
+function isNewMoon(date){ const a = moonAge(date); return a <= 0.5 || a >= 29.03; }
+function seasonNameOf(date){
+  const m = date.getMonth()+1, d = date.getDate(), md = m*100+d;
+  if(md >= 204 && md < 505) return "spring";
+  if(md >= 505 && md < 807) return "summer";
+  if(md >= 807 && md < 1107) return "autumn";
+  return "winter";
+}
+function overrideFor(date){
   const m = date.getMonth()+1, d = date.getDate();
   if(m===12 && d===22){
-    const fu = READINGS.filter(x => x.id==="fu")[0];
-    return {r: fu, birthday: true};
+    return {r: READINGS.filter(x => x.id==="fu")[0], birthday:true,
+      why:"the winter solstice · the day you were born"};
   }
-  if(m===2 && d===4) return {r: SEASONAL.spring, seasonal: true};
-  if(m===5 && d===5) return {r: SEASONAL.summer, seasonal: true};
-  if(m===8 && d===7) return {r: SEASONAL.autumn, seasonal: true};
-  if(m===11 && d===7) return {r: SEASONAL.winter, seasonal: true};
-  let i = dayOfYear(date) % READINGS.length;
-  let r = READINGS[i];
-  if(r.id === "fu" && m === 12 && (d === 21 || d === 23)) r = READINGS[(i+7) % READINGS.length];
-  return {r: r};
+  if(m===2 && d===4) return {r: SEASONAL.spring, seasonal:true, why:"the season opens today"};
+  if(m===5 && d===5) return {r: SEASONAL.summer, seasonal:true, why:"the season opens today"};
+  if(m===8 && d===7) return {r: SEASONAL.autumn, seasonal:true, why:"the season opens today"};
+  if(m===11 && d===7) return {r: SEASONAL.winter, seasonal:true, why:"the season opens today"};
+  if(isFullMoon(date)) return {r: MOON_READINGS.full, moon:true, why:"the moon is full"};
+  if(isNewMoon(date)) return {r: MOON_READINGS.dark, moon:true, why:"the dark of the moon"};
+  return null;
+}
+function poolFor(date){
+  const sn = seasonNameOf(date);
+  return READINGS.filter(r => (r.season || "any") === sn || (r.season || "any") === "any");
+}
+function rawPick(date){
+  const pool = poolFor(date);
+  const i = dayOfYear(date) % pool.length;
+  return {pool: pool, i: i, r: pool[i]};
+}
+function pickReading(date){
+  const ov = overrideFor(date);
+  if(ov) return ov;
+  const raw = rawPick(date);
+  let r = raw.r;
+  const yesterday = new Date(date.getTime() - DAY);
+  const yOv = overrideFor(yesterday);
+  const yR = yOv ? yOv.r : rawPick(yesterday).r;
+  if(r.t === yR.t) r = raw.pool[(raw.i + 7) % raw.pool.length];
+  const tomorrow = new Date(date.getTime() + DAY);
+  const tOv = overrideFor(tomorrow);
+  if(tOv && tOv.r.t === r.t) r = raw.pool[(raw.i + 7) % raw.pool.length];
+  const sn = seasonNameOf(date);
+  const why = (r.season && r.season !== "any")
+    ? "in season · " + sn
+    : "from the well · readings for any season";
+  return {r: r, why: why};
 }
 
 /* ============ shared bits ============ */
@@ -671,6 +908,11 @@ function seasonHeader(){
   const ti = termInfo(now);
   const dateLine = now.toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric"});
   const pct = Math.round(100 * ti.dayIn / ti.total);
+  const pentad = PENTADS[ti.idx][Math.min(2, Math.floor((ti.dayIn - 1) / 5))];
+  const dp = dayPillar(now);
+  let dpLine = "day " + pillarHz(dp) + " · " + pillarEn(dp);
+  if(dp === 39) dpLine += " · the pillar of your birth day returns";
+  else if(dp % 12 === 3) dpLine += " · your day-sign returns";
   return h("div",{className:"card term"},
     h("div",{className:"hz"}, ti.hz),
     h("div",{style:{flex:1}},
@@ -678,6 +920,10 @@ function seasonHeader(){
       h("div",{className:"name"}, ti.name + ", day " + ti.dayIn + " of " + ti.total),
       h("div",{className:"prog"}, h("div",{className:"fill",style:{width:pct+"%"}})),
       h("div",{className:"tiny faint mt8"}, moonPhase(now) + " · " + ti.nextHz + " " + ti.nextName + " in " + ti.daysToNext + (ti.daysToNext===1?" day":" days")),
+      h("div",{className:"tiny mt8",style:{color:"var(--seal)"}},
+        h("span",{style:{fontFamily:"'Songti TC','Songti SC',serif"}},"候 " + pentad[0]),
+        h("span",{className:"faint"}," · " + pentad[1])),
+      h("div",{className:"tiny faint mt8",style:{marginTop:"4px"}}, dpLine),
       h("div",{className:"faint italic small mt8",style:{fontSize:"14px"}}, ti.note)));
 }
 function keepReading(r){
@@ -690,10 +936,12 @@ function readingBlock(){
   const pick = pickReading(now);
   const r = pick.r;
   const isKept = S.kept.some(k => k.t === r.t);
-  const firstSentence = r.tr.split(". ")[0] + ".";
+  const fs0 = r.tr.split(". ")[0];
+  const firstSentence = fs0.endsWith(".") || fs0.endsWith("…") ? fs0 : fs0 + ".";
   if(!unfolded){
     return h("div",{className:"card accent"},
       label("Today's reading · " + r.src),
+      pick.why ? h("div",{className:"tiny faint italic",style:{marginBottom:"8px"}},"why today · " + pick.why) : null,
       pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
         "Winter Solstice, the day you were born. The year turns where you began; 復, the return of light, is yours.") : null,
       r.hz ? h("div",{className:"hanzi"}, r.hz) : null,
@@ -703,6 +951,7 @@ function readingBlock(){
   }
   return h("div",{className:"card accent"},
     label("Today's reading · " + r.src),
+      pick.why ? h("div",{className:"tiny faint italic",style:{marginBottom:"8px"}},"why today · " + pick.why) : null,
     pick.birthday ? h("div",{style:{fontSize:"13px",color:"var(--seal)",fontStyle:"italic",marginBottom:"10px",lineHeight:"1.5"}},
       "Winter Solstice, the day you were born. The year turns where you began; 復, the return of light, is yours.") : null,
     r.hz ? h("div",{className:"hanzi"}, r.hz) : null,
@@ -960,6 +1209,13 @@ function openSync(){
         if(typeof parsed !== "object" || parsed === null || Array.isArray(parsed)){
           say("That does not look like a Still Water backup."); return; }
         if(!confirm("This replaces everything currently on this device. Continue?")) return;
+        if(Array.isArray(parsed.journal) && !Array.isArray(parsed.reflections)){
+          const O = parsed;
+          parsed = DEFAULTS();
+          parsed.legacy = O;
+          parsed.reflections = O.journal.map(j => ({id:j.id || uid(), date:j.date,
+            term:"", readingT:"", readingSrc:"", text:j.text, kind:"entry"}));
+        }
         S = Object.assign(DEFAULTS(), parsed);
         save(); render(); closeSync();
       }},"Load")));
