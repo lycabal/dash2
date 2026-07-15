@@ -835,8 +835,19 @@ function moonAge(date){
   if(age < 0) age += synodic;
   return age;
 }
-function isFullMoon(date){ return Math.abs(moonAge(date) - 14.765) <= 0.5; }
-function isNewMoon(date){ const a = moonAge(date); return a <= 0.5 || a >= 29.03; }
+function noonAge(date){
+  return moonAge(new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12));
+}
+/* Exactly one full-moon day and one new-moon day per lunation:
+   the calendar date on whose noon the age crosses the threshold. */
+function isFullMoon(date){
+  const next = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 12);
+  return noonAge(date) <= 14.765 && noonAge(next) > 14.765;
+}
+function isNewMoon(date){
+  const next = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 12);
+  return noonAge(date) > noonAge(next);
+}
 function seasonNameOf(date){
   const m = date.getMonth()+1, d = date.getDate(), md = m*100+d;
   if(md >= 204 && md < 505) return "spring";
